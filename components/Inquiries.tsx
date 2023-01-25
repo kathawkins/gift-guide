@@ -1,18 +1,43 @@
 import { useState, useEffect } from "react";
 import {  useUser,  useSupabaseClient,  Session,} from "@supabase/auth-helpers-react";
 import { Database } from "../types/supabase";
-import Username from "../components/Username";
 type Inquiries = Database["public"]["Tables"]["inquiries"]["Row"];
+type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 
 export default function Inquiries({ session }: { session: Session }) {
   const supabase = useSupabaseClient<Database>();
   const [loading, setLoading] = useState(true);
   const user = useUser();
+  const [username, setUsername] = useState<Profiles["username"]>(null);
   const [inquiries, setInquiries] = useState<Inquiries[] | null>(null);
 
   useEffect(() => {
     getInquiries();
+    getUsername();
   }, [session]);
+
+  async function getUsername() {
+    try {
+        if (!user) throw new Error("No user");
+
+        let { data, error, status } = await supabase
+        .from("profiles")
+        .select(`username`)
+        .eq("id", user.id)
+        .single();
+
+        if (error && status !== 406) {
+        throw error;
+        }
+
+        if (data) {
+        setUsername(data.username);
+        }
+    } catch (error) {
+        alert("Error loading user data!");
+        console.log(error);
+    }
+    }
 
   async function getInquiries() {
     try {
@@ -28,8 +53,8 @@ export default function Inquiries({ session }: { session: Session }) {
       }
 
       if (data) {
+        // console.log(data)
         setInquiries(data);
-        console.log('inqs', inquiries)
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -48,18 +73,14 @@ export default function Inquiries({ session }: { session: Session }) {
       ) : (
         <div>
           <h1 className="text-blue-400">
-            <Username session={session}></Username> 
-            Saved Gift Guides
+            {/* <Username session={session}></Username>  */}
+            {username ? (username) : ('User')}&apos;s Saved Gift Guides
           </h1>
           {inquiries && inquiries.map((inquiry) => {
             return (
               <div key={inquiry.id} className="card">
                 {/* Add onClick so that titles are selectable */}
                 <h2>Title: {inquiry.title}</h2>
-                {/* Create/Move to UserInputs component */}
-                <p>Recipient&apos;s Hobbies: {inquiry.r_hobbies}</p>
-                <p>Recipient&apos;s Age: {inquiry.r_age}</p>
-                <p>Relationship: {inquiry.r_relationship}</p>
               </div>
             )
           })

@@ -31,9 +31,9 @@ export default function Account({ session }: { session: Session }) {
         }
 
         if (data) {
-        setUsername(data.username);
-        setFullName(data.full_name);
-        setAvatarUrl(data.avatar_url);
+            setUsername(data.username);
+            setFullName(data.full_name);
+            setAvatarUrl(data.avatar_url);
         }
     } catch (error) {
         alert("Error loading user data!");
