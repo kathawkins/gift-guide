@@ -10,8 +10,8 @@ export default function SavedGuidesPage() {
   const session = useSession();
   const supabase = useSupabaseClient();
   //   change to null later and add state handlers
-    const [inquiryID, setinquiryID] = useState(1)
-    // const giftedFunctionality = true
+  const [inquiryID, setinquiryID] = useState(1)
+  // const giftedFunctionality = true
 
   return (
     <div>
@@ -21,7 +21,7 @@ export default function SavedGuidesPage() {
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
             theme="light"
-          />
+        />
         </div>
       ) : (
         <div>

@@ -4,6 +4,8 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import GiftIdeas from "../components/GiftIdeas";
 import InputForm from "../components/InputForm";
+import { Database } from "../types/supabase";
+type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
 
 export default function NewGuidePage() {
   const session = useSession();
@@ -11,7 +13,11 @@ export default function NewGuidePage() {
   //   change to false later and add state handlers
   const [receivedAPIresponse, setReceivedAPIresponse] = useState(true);
   //   change to null later and add state handlers
-  const [inquiryID, setinquiryID] = useState(1);
+  const [inquiryID, setInquiryID] = useState(1);
+
+  const getInquiry = (response_data: Inquiry) => {
+    setInquiryID(response_data.id);
+  };
 
   return (
     <div>
@@ -26,11 +32,12 @@ export default function NewGuidePage() {
       ) : (
         <div>
           <h1>Let&apos;s get started! Answer the questions below.</h1>
-          <InputForm></InputForm>
+          <InputForm getInquiry={getInquiry}></InputForm>
           <div>
             ~ After form is submitted and handled, gift list will go here ~
             <h2 className="text-red-500">
-              Your Gift Guide: (currently defaulted to Inquiry with ID=1)
+              Your Gift Guide: (currently defaulted to Inquiry with ID=
+              {inquiryID})
             </h2>
             {receivedAPIresponse && (
               <GiftIdeas

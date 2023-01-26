@@ -74,11 +74,11 @@ export default function Inquiries({ session }: { session: Session }) {
         <div>
           <h1 className="text-blue-400">
             {/* <Username session={session}></Username>  */}
-            {username ? (username) : ('User')}&apos;s Saved Gift Guides
+            {username ? (username) : ('User')}&apos;s Saved Gift Guides:
           </h1>
           {inquiries && inquiries.map((inquiry) => {
             return (
-              <div key={inquiry.id} className="card">
+              <div key={inquiry.id}>
                 {/* Add onClick so that titles are selectable */}
                 <h2>Title: {inquiry.title}</h2>
               </div>

@@ -60,10 +60,10 @@ export default function GiftIdeas({
         <div>
           <h1>Gifts:</h1>
           {gifts &&
-            gifts.map((gift) => {
+            gifts.map((gift, index) => {
               return (
-                <ul key={gift.id} className="card">
-                  <li>{gift.description}
+                <ul key={gift.id}>
+                  <li>{index+1}. {gift.description}
                   {giftedFunctionality && <button>Gifted</button>}
                   </li>
                 </ul>
