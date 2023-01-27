@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
@@ -16,6 +16,23 @@ export default function NewGuidePage() {
     setInquiryID(response_data.id);
   };
 
+  async function requestGiftsFromGPT(prompt: string) {
+    try {
+      const GPTresponse = await fetch("/api/OpenAI", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: prompt }),
+      });
+      const data = await GPTresponse.json();
+      const giftsResponse = data.result.choices[0].text;
+    } catch (error) {
+      alert("Error fetching gifts!");
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       {!session ? (
@@ -29,7 +46,10 @@ export default function NewGuidePage() {
       ) : (
         <div>
           <h1>Let&apos;s get started! Answer the questions below.</h1>
-          <InputForm newInquiryCreated={newInquiryCreated}></InputForm>
+          <InputForm
+            newInquiryCreated={newInquiryCreated}
+            requestGifts={requestGiftsFromGPT}
+          ></InputForm>
           <div>
             {inquiryID && (
               <div>

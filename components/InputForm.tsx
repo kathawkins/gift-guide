@@ -16,8 +16,10 @@ type newInquiry = {
 
 export default function InputForm({
   newInquiryCreated,
+  requestGifts,
 }: {
   newInquiryCreated: CallableFunction;
+  requestGifts: CallableFunction;
 }) {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
@@ -187,7 +189,7 @@ export default function InputForm({
       return finalPrompt;
     };
 
-    // add case formatting and error handling (empty string) for all fields
+    // add error handling (empty string) for all fields?
     const inquiryData = {
       title: formatTitle(formFields.title),
       r_relationship: formFields.relationship.toLowerCase(),
@@ -211,7 +213,7 @@ export default function InputForm({
 
     createInquiry(inquiryData);
 
-    createGPTPrompt(inquiryData);
+    requestGifts(createGPTPrompt(inquiryData));
 
     setformFields({
       title: "",
