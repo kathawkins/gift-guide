@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Database } from "../types/supabase";
-type Inquiries = Database["public"]["Tables"]["inquiries"]["Row"];
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-type inquiry = {
+type newInquiry = {
   title: string;
   r_relationship: string;
   r_age: string;
@@ -16,9 +15,9 @@ type inquiry = {
 };
 
 export default function InputForm({
-  getInquiry,
+  newInquiryCreated,
 }: {
-  getInquiry: CallableFunction;
+  newInquiryCreated: CallableFunction;
 }) {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
@@ -84,7 +83,6 @@ export default function InputForm({
     interest3: string
   ): string => {
     let interests = "";
-    debugger;
     if (interest1 && interest2 && interest3) {
       interests = interest1.concat(", ", interest2, ", and ", interest3);
     } else if (interest1 && interest2) {
@@ -111,6 +109,23 @@ export default function InputForm({
     return hobbies;
   };
 
+  const formatTitle = (userInput: string): string => {
+    let formattedTitle = "";
+    const numInputWords = userInput.split(" ").length;
+    if (numInputWords > 1) {
+      formattedTitle = userInput
+        .toLowerCase()
+        .split(" ")
+        .map((word) => {
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
+    } else {
+      formattedTitle = userInput.toLowerCase();
+    }
+    return formattedTitle;
+  };
+
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!user) {
@@ -118,28 +133,85 @@ export default function InputForm({
       return;
     }
 
+    const createGPTPrompt = ({
+      title,
+      r_relationship,
+      r_age,
+      r_occupation,
+      r_interests,
+      r_hobbies,
+      g_occasion,
+      g_price_low,
+      g_price_high,
+      profile_id,
+    }: newInquiry) => {
+      let finalPrompt = "";
+      if (!r_occupation) {
+        finalPrompt.concat("");
+        finalPrompt =
+          "Provide a list of 10 " +
+          g_occasion +
+          " gift ideas within the $" +
+          g_price_low +
+          "-" +
+          g_price_high +
+          " price range for my " +
+          r_age +
+          " " +
+          r_relationship +
+          ". Their interests include " +
+          r_interests +
+          " and their hobbies are " +
+          r_hobbies +
+          ".";
+      } else {
+        finalPrompt =
+          "Provide a list of 10 " +
+          g_occasion +
+          " gift ideas within the $" +
+          g_price_low +
+          "-" +
+          g_price_high +
+          " price range for my " +
+          r_age +
+          " " +
+          r_relationship +
+          ". They are a(n) " +
+          r_occupation +
+          " who's interests include " +
+          r_interests +
+          " and their hobbies are " +
+          r_hobbies +
+          ".";
+      }
+      return finalPrompt;
+    };
+
+    // add case formatting and error handling (empty string) for all fields
     const inquiryData = {
-      title: formFields.title,
-      r_relationship: formFields.relationship,
-      r_age: formFields.age,
-      r_occupation: formFields.occupation,
+      title: formatTitle(formFields.title),
+      r_relationship: formFields.relationship.toLowerCase(),
+      r_age: formFields.age.toLowerCase(),
+      r_occupation: formFields.occupation.toLowerCase(),
       r_interests: formatInterests(
         formFields.interest1,
         formFields.interest2,
         formFields.interest3
-      ),
+      ).toLowerCase(),
       r_hobbies: formatHobbies(
         formFields.hobby1,
         formFields.hobby2,
         formFields.hobby3
-      ),
-      g_occasion: formFields.occasion,
+      ).toLowerCase(),
+      g_occasion: formFields.occasion.toLowerCase(),
       g_price_low: formFields.priceLow,
       g_price_high: formFields.priceHigh,
       profile_id: user.id,
     };
 
     createInquiry(inquiryData);
+
+    createGPTPrompt(inquiryData);
 
     setformFields({
       title: "",
@@ -169,7 +241,7 @@ export default function InputForm({
     g_price_low,
     g_price_high,
     profile_id,
-  }: inquiry) {
+  }: newInquiry) {
     try {
       if (!user) throw new Error("No user");
 
@@ -194,7 +266,7 @@ export default function InputForm({
       }
 
       if (data) {
-        getInquiry(data[0]);
+        newInquiryCreated(data[0]);
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -223,6 +295,7 @@ export default function InputForm({
         value={formFields.relationship}
         required
       />
+      {/* Add more options */}
       <datalist id="relationship">
         <option>Sibling</option>
         <option>Friend</option>
@@ -255,7 +328,7 @@ export default function InputForm({
         type="text"
         list="occupation"
         name="occupation"
-        placeholder="Add an occupation or choose from the dropdown"
+        placeholder="Add an occupation or choose from the dropdown (Optional)"
         onChange={onOccupationChange}
         value={formFields.occupation}
       />

@@ -10,12 +10,9 @@ type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
 export default function NewGuidePage() {
   const session = useSession();
   const supabase = useSupabaseClient();
-  //   change to false later and add state handlers
-  const [receivedAPIresponse, setReceivedAPIresponse] = useState(true);
-  //   change to null later and add state handlers
-  const [inquiryID, setInquiryID] = useState(1);
+  const [inquiryID, setInquiryID] = useState<number | null>(null);
 
-  const getInquiry = (response_data: Inquiry) => {
+  const newInquiryCreated = (response_data: Inquiry) => {
     setInquiryID(response_data.id);
   };
 
@@ -32,19 +29,16 @@ export default function NewGuidePage() {
       ) : (
         <div>
           <h1>Let&apos;s get started! Answer the questions below.</h1>
-          <InputForm getInquiry={getInquiry}></InputForm>
+          <InputForm newInquiryCreated={newInquiryCreated}></InputForm>
           <div>
-            ~ After form is submitted and handled, gift list will go here ~
-            <h2 className="text-red-500">
-              Your Gift Guide: (currently defaulted to Inquiry with ID=
-              {inquiryID})
-            </h2>
-            {receivedAPIresponse && (
-              <GiftIdeas
-                session={session}
-                inquiryID={inquiryID}
-                giftedFunctionality={false}
-              ></GiftIdeas>
+            {inquiryID && (
+              <div>
+                <h2 className="text-red-500">Your Gift Guide:</h2>
+                <GiftIdeas
+                  inquiryID={inquiryID}
+                  giftedFunctionality={false}
+                ></GiftIdeas>
+              </div>
             )}
           </div>
           <div>

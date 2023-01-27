@@ -13,23 +13,26 @@ export interface Database {
         Row: {
           created_at: string | null
           description: string | null
-          gifted: boolean | null
+          gifted: boolean
           id: number
           inquiry_id: number | null
+          profile_id: string | null
         }
         Insert: {
           created_at?: string | null
           description?: string | null
-          gifted?: boolean | null
+          gifted?: boolean
           id?: number
           inquiry_id?: number | null
+          profile_id?: string | null
         }
         Update: {
           created_at?: string | null
           description?: string | null
-          gifted?: boolean | null
+          gifted?: boolean
           id?: number
           inquiry_id?: number | null
+          profile_id?: string | null
         }
       }
       inquiries: {

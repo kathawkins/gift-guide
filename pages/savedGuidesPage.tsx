@@ -9,9 +9,7 @@ import GiftIdeas from "@/components/GiftIdeas";
 export default function SavedGuidesPage() {
   const session = useSession();
   const supabase = useSupabaseClient();
-  //   change to null later and add state handlers
-  const [inquiryID, setinquiryID] = useState(1)
-  // const giftedFunctionality = true
+  const [inquiryID, setInquiryID] = useState<number | null>(null);
 
   return (
     <div>
@@ -21,14 +19,22 @@ export default function SavedGuidesPage() {
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
             theme="light"
-        />
+          />
         </div>
       ) : (
         <div>
-          <Inquiries session={session} />
-          <h2 className="text-red-500">Selected Gift Guide: (currently defaulted to Inquiry with ID=1)</h2>
-          <UserInputs session={session} inquiryID={inquiryID}/>
-          <GiftIdeas session={session} inquiryID={inquiryID} giftedFunctionality={true}/>
+          <Inquiries setInquiry={setInquiryID} />
+
+          {!inquiryID && (
+            <div>Select a guide above to see it&apos;s details! </div>
+          )}
+          {inquiryID && (
+            <div>
+              <UserInputs inquiryID={inquiryID} />
+              <GiftIdeas inquiryID={inquiryID} giftedFunctionality={true} />
+            </div>
+          )}
+
           <div>
             <Link href="/newGuidePage">
               <button>Create a New Gift Guide</button>

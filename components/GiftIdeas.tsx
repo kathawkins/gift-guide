@@ -1,54 +1,81 @@
 import { useState, useEffect } from "react";
-import {
-  useUser,
-  useSupabaseClient,
-  Session,
-} from "@supabase/auth-helpers-react";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Database } from "../types/supabase";
-type GiftIdeas = Database["public"]["Tables"]["gifts"]["Row"];
+type GiftIdea = Database["public"]["Tables"]["gifts"]["Row"];
 
 export default function GiftIdeas({
-  session,
   inquiryID,
   giftedFunctionality,
 }: {
-  session: Session;
   inquiryID: number;
   giftedFunctionality: boolean;
 }) {
   const supabase = useSupabaseClient<Database>();
   const [loading, setLoading] = useState(true);
   const user = useUser();
-  const [gifts, setGifts] = useState<GiftIdeas[] | null>(null);
+  const [gifts, setGifts] = useState<GiftIdea[] | null>(null);
 
-  useEffect(() => {
-    getGiftIdeas();
-  }, [session]);
-
-  async function getGiftIdeas() {
+  async function updateGiftedStatus(gift: GiftIdea) {
+    if (!gifts) {
+      console.error("Tried to update gifts when gifts were null");
+      return;
+    }
     try {
-      setLoading(true);
-      if (!user) throw new Error("No user");
-
-      let { data, error, status } = await supabase
+      let { error } = await supabase
         .from("gifts")
-        .select()
-        .eq("inquiry_id", inquiryID);
+        .update({ gifted: !gift.gifted })
+        .eq("id", gift.id);
+      setGifts(
+        gifts.map((giftElement) => {
+          if (giftElement.id == gift.id) {
+            return { ...giftElement, gifted: !giftElement.gifted };
+          } else {
+            return giftElement;
+          }
+        })
+      );
 
-      if (error && status !== 406) {
+      if (error) {
         throw error;
-      }
-
-      if (data) {
-        setGifts(data);
       }
     } catch (error) {
       alert("Error loading user data!");
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   }
+
+  useEffect(() => {
+    async function getGiftIdeas() {
+      try {
+        setLoading(true);
+        if (!user) throw new Error("No user");
+
+        let { data, error, status } = await supabase
+          .from("gifts")
+          .select()
+          .eq("inquiry_id", inquiryID);
+
+        if (error && status !== 406) {
+          throw error;
+        }
+
+        if (data) {
+          setGifts(
+            data.sort((giftA, giftB) => {
+              return giftA.id - giftB.id;
+            })
+          );
+        }
+      } catch (error) {
+        alert("Error loading user data!");
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getGiftIdeas();
+  }, [inquiryID, user, supabase]);
 
   return (
     <div>
@@ -58,13 +85,18 @@ export default function GiftIdeas({
         </div>
       ) : (
         <div>
-          <h1>Gifts:</h1>
+          <h1>Suggested Gifts:</h1>
           {gifts &&
             gifts.map((gift, index) => {
               return (
                 <ul key={gift.id}>
-                  <li>{index+1}. {gift.description}
-                  {giftedFunctionality && <button>Gifted</button>}
+                  <li>
+                    {index + 1}. {gift.description}
+                    {giftedFunctionality && (
+                      <button onClick={() => updateGiftedStatus(gift)}>
+                        {gift.gifted ? "🎂 Gifted 🎂" : "Not Gifted"}
+                      </button>
+                    )}
                   </li>
                 </ul>
               );
