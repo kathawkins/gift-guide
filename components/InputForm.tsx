@@ -281,9 +281,9 @@ export default function InputForm({
   }
 
   return (
-    <form className="form-control text-xs max-w-xl" onSubmit={onFormSubmit}>
-      <label htmlFor="title">
-        Title (e.g. &quot;Gift for Mom&apos;s 50th&quot;)
+    <form className="form-control max-w-3xl mx-auto" onSubmit={onFormSubmit}>
+      <label htmlFor="title" className="text-lg font-bold mt-5">
+        Title
       </label>
       <input
         type="text"
@@ -292,18 +292,22 @@ export default function InputForm({
         required
         onChange={onTitleChange}
         value={formFields.title}
+        placeholder='(e.g. "Gift for Mom&apos;s 50th")'
+        className="input input-primary input-bordered w-full"
       ></input>
-      <label>Relationship to Recipient</label>
+      <label className="text-lg font-bold mt-2">
+        Relationship to Recipient
+      </label>
       <input
         type="text"
         list="relationship"
         name="relationship"
-        placeholder="Add an relationship or choose from the dropdown"
+        placeholder="Choose from our list or add your own"
         onChange={onRelationshipChange}
         value={formFields.relationship}
         required
+        className="input input-primary input-bordered w-full"
       />
-      {/* Add more options */}
       <datalist id="relationship">
         <option>Sibling</option>
         <option>Friend</option>
@@ -312,15 +316,16 @@ export default function InputForm({
         <option>Child</option>
         <option>Colleague</option>
       </datalist>
-      <label>Age of Recipient</label>
+      <label className="text-lg font-bold mt-2">Age of Recipient</label>
       <select
         id="age"
-        className="select select-bordered text-white"
         name="age"
         onChange={onAgeChange}
         value={formFields.age}
         required
+        className="input input-primary input-bordered w-full"
       >
+        {/* Change disabled select text to match other placeholders */}
         <option disabled value="">
           Choose from the dropdown
         </option>
@@ -331,14 +336,17 @@ export default function InputForm({
         <option>Adult</option>
         <option>Senior Adult</option>
       </select>
-      <label>Recipient&apos;s Occupation</label>
+      <label className="text-lg font-bold mt-2">
+        Recipient&apos;s Occupation
+      </label>
       <input
         type="text"
         list="occupation"
         name="occupation"
-        placeholder="Add an occupation or choose from the dropdown (Optional)"
+        placeholder="Choose from our list or add your own (Optional)"
         onChange={onOccupationChange}
         value={formFields.occupation}
+        className="input input-primary input-bordered w-full"
       />
       <datalist id="occupation">
         <option>None</option>
@@ -358,204 +366,233 @@ export default function InputForm({
         <option>Consultant</option>
         <option>Writer</option>
       </datalist>
-      <label>Recipient&apos;s Interests</label>
-      <input
-        type="text"
-        list="interest1"
-        name="interests"
-        placeholder="Add an interest or choose from the dropdown"
-        onChange={onInterest1Change}
-        value={formFields.interest1}
-        required
-      />
-      <datalist id="interest1">
-        <option>Sports</option>
-        <option>Travel</option>
-        <option>Art</option>
-        <option>Beer</option>
-        <option>Pets</option>
-        <option>Home Decor</option>
-        <option>Jewelry</option>
-        <option>Food</option>
-        <option>Fashion</option>
-        <option>Coffee</option>
-        <option>Games</option>
-        <option>Whiskey</option>
-        <option>Tech</option>
-        <option>Self-care</option>
-        <option>Movies</option>
-        <option>Wine</option>
-        <option>Video Games</option>
-        <option>Wine</option>
-        <option>TV</option>
-        <option>Music</option>
-        <option>Yoga</option>
-      </datalist>
-      <input
-        type="text"
-        list="interest2"
-        placeholder="Add an interest or choose from the dropdown (Optional)"
-        onChange={onInterest2Change}
-        value={formFields.interest2}
-        disabled={formFields.interest1 ? false : true}
-      />
-      <datalist id="interest2">
-        <option>Sports</option>
-        <option>Travel</option>
-        <option>Art</option>
-        <option>Beer</option>
-        <option>Pets</option>
-        <option>Home Decor</option>
-        <option>Jewelry</option>
-        <option>Food</option>
-        <option>Fashion</option>
-        <option>Coffee</option>
-        <option>Games</option>
-        <option>Whiskey</option>
-        <option>Tech</option>
-        <option>Self-care</option>
-        <option>Movies</option>
-        <option>Wine</option>
-        <option>Video Games</option>
-        <option>Wine</option>
-        <option>TV</option>
-        <option>Music</option>
-        <option>Yoga</option>
-      </datalist>
-      <input
-        type="text"
-        list="interest3"
-        placeholder="Add an interest or choose from the dropdown (Optional)"
-        onChange={onInterest3Change}
-        value={formFields.interest3}
-        disabled={formFields.interest2 ? false : true}
-      />
-      <datalist id="interest3">
-        <option>Sports</option>
-        <option>Travel</option>
-        <option>Art</option>
-        <option>Beer</option>
-        <option>Pets</option>
-        <option>Home Decor</option>
-        <option>Jewelry</option>
-        <option>Food</option>
-        <option>Fashion</option>
-        <option>Coffee</option>
-        <option>Games</option>
-        <option>Whiskey</option>
-        <option>Tech</option>
-        <option>Self-care</option>
-        <option>Movies</option>
-        <option>Wine</option>
-        <option>Video Games</option>
-        <option>Wine</option>
-        <option>TV</option>
-        <option>Music</option>
-        <option>Yoga</option>
-      </datalist>
-      <label htmlFor="hobbies">Recipient&apos;s Hobbies</label>
-      <input
-        type="text"
-        list="hobby1"
-        name="hobbies"
-        placeholder="Add a hobby or choose from the dropdown"
-        onChange={onHobby1Change}
-        value={formFields.hobby1}
-        required
-      />
-      <datalist id="hobby1">
-        <option>Cooking</option>
-        <option>Gardening</option>
-        <option>Fishing</option>
-        <option>Hiking</option>
-        <option>Gaming</option>
-        <option>Camping</option>
-        <option>Volunteering</option>
-        <option>Cycling</option>
-        <option>Farming</option>
-        <option>Rock Climbing</option>
-        <option>Traveling</option>
-        <option>Performing Arts</option>
-        <option>Reading</option>
-        <option>Photography</option>
-        <option>Writing</option>
-        <option>Running</option>
-        <option>Drawing</option>
-        <option>Knitting</option>
-        <option>Painting</option>
-        <option>Weightlifting</option>
-        <option>Crafting</option>
-      </datalist>
-      <input
-        type="text"
-        list="hobby2"
-        placeholder="Add a hobby or choose from the dropdown (Optional)"
-        onChange={onHobby2Change}
-        value={formFields.hobby2}
-        disabled={formFields.hobby1 ? false : true}
-      />
-      <datalist id="hobby2">
-        <option>Cooking</option>
-        <option>Gardening</option>
-        <option>Fishing</option>
-        <option>Hiking</option>
-        <option>Gaming</option>
-        <option>Camping</option>
-        <option>Volunteering</option>
-        <option>Cycling</option>
-        <option>Farming</option>
-        <option>Rock Climbing</option>
-        <option>Traveling</option>
-        <option>Performing Arts</option>
-        <option>Reading</option>
-        <option>Photography</option>
-        <option>Writing</option>
-        <option>Running</option>
-        <option>Drawing</option>
-        <option>Knitting</option>
-        <option>Painting</option>
-        <option>Weightlifting</option>
-        <option>Crafting</option>
-      </datalist>
-      <input
-        type="text"
-        list="hobby3"
-        placeholder="Add a hobby or choose from the dropdown (Optional)"
-        onChange={onHobby3Change}
-        value={formFields.hobby3}
-        disabled={formFields.hobby2 ? false : true}
-      />
-      <datalist id="hobby3">
-        <option>Cooking</option>
-        <option>Gardening</option>
-        <option>Fishing</option>
-        <option>Hiking</option>
-        <option>Gaming</option>
-        <option>Camping</option>
-        <option>Volunteering</option>
-        <option>Cycling</option>
-        <option>Farming</option>
-        <option>Rock Climbing</option>
-        <option>Traveling</option>
-        <option>Performing Arts</option>
-        <option>Reading</option>
-        <option>Photography</option>
-        <option>Writing</option>
-        <option>Running</option>
-        <option>Drawing</option>
-        <option>Knitting</option>
-        <option>Painting</option>
-        <option>Weightlifting</option>
-        <option>Crafting</option>
-      </datalist>
-      <label htmlFor="occasion">Gift Occasion</label>
+      <label className="text-lg font-bold mt-2">
+        Recipient&apos;s Interests
+      </label>
+      <div className="grid grid-cols-4 gap-8">
+        <div className="col-span-2">
+          <input
+            type="text"
+            list="interest1"
+            name="interests"
+            placeholder="Choose from our list or add your own"
+            onChange={onInterest1Change}
+            value={formFields.interest1}
+            required
+            className="input input-primary input-bordered w-full"
+          />
+          <datalist id="interest1">
+            <option>Sports</option>
+            <option>Travel</option>
+            <option>Art</option>
+            <option>Beer</option>
+            <option>Pets</option>
+            <option>Home Decor</option>
+            <option>Jewelry</option>
+            <option>Food</option>
+            <option>Fashion</option>
+            <option>Coffee</option>
+            <option>Games</option>
+            <option>Whiskey</option>
+            <option>Tech</option>
+            <option>Self-care</option>
+            <option>Movies</option>
+            <option>Wine</option>
+            <option>Video Games</option>
+            <option>Wine</option>
+            <option>TV</option>
+            <option>Music</option>
+            <option>Yoga</option>
+          </datalist>
+        </div>
+        <div>
+          <input
+            type="text"
+            list="interest2"
+            placeholder="(Optional)"
+            onChange={onInterest2Change}
+            value={formFields.interest2}
+            disabled={formFields.interest1 ? false : true}
+            className="input input-primary input-bordered w-full"
+          />
+          <datalist id="interest2">
+            <option>Sports</option>
+            <option>Travel</option>
+            <option>Art</option>
+            <option>Beer</option>
+            <option>Pets</option>
+            <option>Home Decor</option>
+            <option>Jewelry</option>
+            <option>Food</option>
+            <option>Fashion</option>
+            <option>Coffee</option>
+            <option>Games</option>
+            <option>Whiskey</option>
+            <option>Tech</option>
+            <option>Self-care</option>
+            <option>Movies</option>
+            <option>Wine</option>
+            <option>Video Games</option>
+            <option>Wine</option>
+            <option>TV</option>
+            <option>Music</option>
+            <option>Yoga</option>
+          </datalist>
+        </div>
+        <div>
+          <input
+            type="text"
+            list="interest3"
+            placeholder="(Optional)"
+            onChange={onInterest3Change}
+            value={formFields.interest3}
+            disabled={formFields.interest2 ? false : true}
+            className="input input-primary input-bordered w-full"
+          />
+          <datalist id="interest3">
+            <option>Sports</option>
+            <option>Travel</option>
+            <option>Art</option>
+            <option>Beer</option>
+            <option>Pets</option>
+            <option>Home Decor</option>
+            <option>Jewelry</option>
+            <option>Food</option>
+            <option>Fashion</option>
+            <option>Coffee</option>
+            <option>Games</option>
+            <option>Whiskey</option>
+            <option>Tech</option>
+            <option>Self-care</option>
+            <option>Movies</option>
+            <option>Wine</option>
+            <option>Video Games</option>
+            <option>Wine</option>
+            <option>TV</option>
+            <option>Music</option>
+            <option>Yoga</option>
+          </datalist>
+        </div>
+      </div>
+      <label className="text-lg font-bold mt-2" htmlFor="hobbies">
+        Recipient&apos;s Hobbies
+      </label>
+      <div className="grid grid-cols-4 gap-8">
+        <div className="col-span-2">
+          <input
+            type="text"
+            list="hobby1"
+            name="hobbies"
+            placeholder="Choose from our list or add your own"
+            onChange={onHobby1Change}
+            value={formFields.hobby1}
+            required
+            className="input input-primary input-bordered w-full"
+          />
+          <datalist id="hobby1">
+            <option>Cooking</option>
+            <option>Gardening</option>
+            <option>Fishing</option>
+            <option>Hiking</option>
+            <option>Gaming</option>
+            <option>Camping</option>
+            <option>Volunteering</option>
+            <option>Cycling</option>
+            <option>Farming</option>
+            <option>Rock Climbing</option>
+            <option>Traveling</option>
+            <option>Performing Arts</option>
+            <option>Reading</option>
+            <option>Photography</option>
+            <option>Writing</option>
+            <option>Running</option>
+            <option>Drawing</option>
+            <option>Knitting</option>
+            <option>Painting</option>
+            <option>Weightlifting</option>
+            <option>Crafting</option>
+          </datalist>
+        </div>
+        <div>
+          <input
+            type="text"
+            list="hobby2"
+            placeholder="(Optional)"
+            onChange={onHobby2Change}
+            value={formFields.hobby2}
+            disabled={formFields.hobby1 ? false : true}
+            className="input input-primary input-bordered w-full"
+          />
+          <datalist id="hobby2">
+            <option>Cooking</option>
+            <option>Gardening</option>
+            <option>Fishing</option>
+            <option>Hiking</option>
+            <option>Gaming</option>
+            <option>Camping</option>
+            <option>Volunteering</option>
+            <option>Cycling</option>
+            <option>Farming</option>
+            <option>Rock Climbing</option>
+            <option>Traveling</option>
+            <option>Performing Arts</option>
+            <option>Reading</option>
+            <option>Photography</option>
+            <option>Writing</option>
+            <option>Running</option>
+            <option>Drawing</option>
+            <option>Knitting</option>
+            <option>Painting</option>
+            <option>Weightlifting</option>
+            <option>Crafting</option>
+          </datalist>
+        </div>
+        <div>
+          <input
+            type="text"
+            list="hobby3"
+            placeholder="(Optional)"
+            onChange={onHobby3Change}
+            value={formFields.hobby3}
+            disabled={formFields.hobby2 ? false : true}
+            className="input input-primary input-bordered w-full"
+          />
+          <datalist id="hobby3">
+            <option>Cooking</option>
+            <option>Gardening</option>
+            <option>Fishing</option>
+            <option>Hiking</option>
+            <option>Gaming</option>
+            <option>Camping</option>
+            <option>Volunteering</option>
+            <option>Cycling</option>
+            <option>Farming</option>
+            <option>Rock Climbing</option>
+            <option>Traveling</option>
+            <option>Performing Arts</option>
+            <option>Reading</option>
+            <option>Photography</option>
+            <option>Writing</option>
+            <option>Running</option>
+            <option>Drawing</option>
+            <option>Knitting</option>
+            <option>Painting</option>
+            <option>Weightlifting</option>
+            <option>Crafting</option>
+          </datalist>
+        </div>
+      </div>
+      <label className="text-lg font-bold mt-2" htmlFor="occasion">
+        Gift Occasion
+      </label>
       <input
         type="text"
         list="occasion"
-        placeholder="Add an occasion or choose from the dropdown"
+        placeholder="Choose from our list or add your own"
         onChange={onOccasionChange}
         value={formFields.occasion}
         required
+        className="input input-primary input-bordered w-full"
       />
       <datalist id="occasion">
         <option>Birthday</option>
@@ -565,7 +602,7 @@ export default function InputForm({
         <option>Holiday</option>
         <option>&quot;Just Because&quot;</option>
       </datalist>
-      <label>Desired Price Range</label>
+      <label className="text-lg font-bold mt-2">Desired Price Range</label>
       <div className="columns-2 max-w-xs">
         $ Low:{" "}
         <input
@@ -574,6 +611,7 @@ export default function InputForm({
           required
           onChange={onPriceLowChange}
           value={formFields.priceLow}
+          className="input input-primary input-bordered w-full"
         ></input>
         $ High:{" "}
         <input
@@ -583,9 +621,14 @@ export default function InputForm({
           onChange={onPriceHighChange}
           value={formFields.priceHigh}
           min={formFields.priceLow + 1}
+          className="input input-primary input-bordered w-full"
         ></input>
       </div>
-      <input type="submit" value="Submit"></input>
+      <input
+        type="submit"
+        value="Submit"
+        className="btn my-2 btn-secondary"
+      ></input>
     </form>
   );
 }

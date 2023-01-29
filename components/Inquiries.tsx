@@ -109,24 +109,31 @@ export default function Inquiries({
         </div>
       ) : (
         <div>
-          <h1 className="text-blue-400">
-            {/* <Username session={session}></Username>  */}
+          <h2 className="text-2xl">
             {username ? username : "User"}&apos;s Previous Gift Guides:
-          </h1>
-          {inquiries &&
-            inquiries.map((inquiry) => {
-              return (
-                <div key={inquiry.id}>
-                  {/* Add onClick so that titles are selectable */}
-                  <h2 onClick={() => setInquiry(inquiry.id)}>
-                    Title: {inquiry.title}
-                    <button onClick={() => deleteInquiryAndGifts(inquiry)}>
-                      Delete from Profile
-                    </button>
-                  </h2>
-                </div>
-              );
-            })}
+          </h2>
+          <ul>
+            {inquiries &&
+              inquiries.map((inquiry) => {
+                return (
+                  <li
+                    key={inquiry.id}
+                    className="text-lg grid grid-cols-2 gap-2 my-1"
+                    onClick={() => setInquiry(inquiry.id)}
+                  >
+                    <div className="grid content-center">{inquiry.title}</div>
+                    <div className="max-w-xs grid justify-end">
+                      <button
+                        className="btn btn-secondary btn-outline"
+                        onClick={() => deleteInquiryAndGifts(inquiry)}
+                      >
+                        Delete from Profile
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
       )}
     </div>

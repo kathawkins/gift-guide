@@ -79,43 +79,53 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="max-w-3xl mx-auto ">
       <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <label className="text-lg" htmlFor="email">
+          Email{" "}
+        </label>
+        <input
+          id="email"
+          type="text"
+          value={session.user.email}
+          disabled
+          className="w-80 input input-primary input-bordered"
+        />
       </div>
       <div>
-        <label htmlFor="username">Username</label>
+        <label className="text-lg" htmlFor="username">
+          Username{" "}
+        </label>
         <input
           id="username"
           type="text"
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
+          className="input input-secondary input-bordered w-s"
         />
       </div>
       <div>
-        <label htmlFor="full_name">Full Name</label>
+        <label className="text-lg" htmlFor="full_name">
+          Full Name{" "}
+        </label>
         <input
           id="full_name"
           type="full_name"
           value={full_name || ""}
           onChange={(e) => setFullName(e.target.value)}
+          className="input input-secondary input-bordered w-s"
         />
       </div>
-
       <div>
         <button
-          className="button primary block"
+          className="btn btn-secondary"
           onClick={() => updateProfile({ username, full_name, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
         </button>
-      </div>
-
-      <div>
         <button
-          className="button block"
+          className="btn btn-primary"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out

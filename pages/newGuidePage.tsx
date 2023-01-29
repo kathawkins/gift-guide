@@ -84,6 +84,7 @@ export default function NewGuidePage() {
 
   return (
     <div>
+      <h1 className="text-4xl font-bold">GIFT GUIDE</h1>
       {!session ? (
         <div className="mx-auto max-w-xl">
           <Auth
@@ -94,10 +95,10 @@ export default function NewGuidePage() {
         </div>
       ) : (
         <div>
-          <h1>
+          <h2 className="text-2xl">
             Let&apos;s get started! Tell us about the person you&apos;re
             shopping for.
-          </h1>
+          </h2>
           <InputForm
             newInquiryCreated={newInquiryCreated}
             requestGifts={requestGiftsFromGPT}
@@ -105,7 +106,7 @@ export default function NewGuidePage() {
           <div>
             {loading ? (
               <div>
-                <h1>Loading gifts for {newInquiry?.title}!...</h1>
+                <h3>Loading gifts for {newInquiry?.title}!...</h3>
               </div>
             ) : (
               <div>
@@ -125,10 +126,12 @@ export default function NewGuidePage() {
           </div>
           <div>
             <Link href="/savedGuidesPage">
-              <button>Go to Saved Gift Guides</button>
+              <button className="btn btn-primary">
+                Go to Saved Gift Guides
+              </button>
             </Link>
             <Link href="/">
-              <button>Go to Homepage</button>
+              <button className="btn btn-primary">Go to Homepage</button>
             </Link>
           </div>
         </div>

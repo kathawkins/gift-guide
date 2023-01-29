@@ -5,14 +5,12 @@ type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
 
 export default function UserInputs({ inquiryID }: { inquiryID: number }) {
   const supabase = useSupabaseClient<Database>();
-  const [loading, setLoading] = useState(true);
   const user = useUser();
   const [inquiries, setInquiries] = useState<Inquiry[] | null>(null);
 
   useEffect(() => {
     async function getInquiries() {
       try {
-        setLoading(true);
         if (!user) throw new Error("No user");
 
         let { data, error, status } = await supabase
@@ -31,7 +29,6 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
         alert("Error loading user data!");
         console.log(error);
       } finally {
-        setLoading(false);
       }
     }
     getInquiries();
@@ -39,39 +36,32 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
 
   return (
     <div>
-      {loading ? (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      ) : (
-        <div>
-          {inquiries &&
-            inquiries.map((inquiry) => {
-              return (
-                <div key={inquiry.id}>
-                  <h2 className="text-red-500">
-                    Your {inquiry.r_relationship}&apos;s gift guide:
-                  </h2>
-                  <div className="card">
-                    <p>Occasion: {inquiry.g_occasion}</p>
-                    <p>
-                      Price Range: ${inquiry.g_price_low}-{inquiry.g_price_high}
-                    </p>
-                    <p>Age: {inquiry.r_age}</p>
+      {inquiries &&
+        inquiries.map((inquiry) => {
+          return (
+            <div key={inquiry.id}>
+              <h2 className="text-lg">
+                Your {inquiry.r_relationship}&apos;s gift guide:
+              </h2>
+              <div className="card text-xs">
+                <p>Title: {inquiry.title}</p>
+                <p>Occasion: {inquiry.g_occasion}</p>
+                <p>
+                  Price Range: ${inquiry.g_price_low}-{inquiry.g_price_high}
+                </p>
+                <p>Age: {inquiry.r_age}</p>
 
-                    {inquiry.r_occupation ? (
-                      <p> Occupation: {inquiry.r_occupation}</p>
-                    ) : (
-                      <p> Occupation: (not included)</p>
-                    )}
-                    <p>Hobbies: {inquiry.r_hobbies}</p>
-                    <p>Interests: {inquiry.r_interests}</p>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-      )}
+                {inquiry.r_occupation ? (
+                  <p> Occupation: {inquiry.r_occupation}</p>
+                ) : (
+                  <p> Occupation: (not included)</p>
+                )}
+                <p>Hobbies: {inquiry.r_hobbies}</p>
+                <p>Interests: {inquiry.r_interests}</p>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 }

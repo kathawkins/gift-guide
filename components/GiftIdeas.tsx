@@ -84,22 +84,29 @@ export default function GiftIdeas({
         </div>
       ) : (
         <div>
-          <h1>Suggested Gifts:</h1>
-          {gifts &&
-            gifts.map((gift, index) => {
-              return (
-                <ul key={gift.id}>
-                  <li>
-                    {index + 1}. {gift.description}
-                    {giftedFunctionality && (
-                      <button onClick={() => updateGiftedStatus(gift)}>
-                        {gift.gifted ? "🎂 Gifted 🎂" : "Not Gifted"}
-                      </button>
-                    )}
+          <h2 className="text-lg">Suggested Gifts:</h2>
+          <ul>
+            {gifts &&
+              gifts.map((gift, index) => {
+                return (
+                  <li key={gift.id} className="grid my-1 grid-cols-2 gap-2">
+                    <div className="grid content-center">
+                      {index + 1}. {gift.description}
+                    </div>
+                    <div className="max-w-xs grid justify-end">
+                      {giftedFunctionality && (
+                        <button
+                          className="btn btn-secondary"
+                          onClick={() => updateGiftedStatus(gift)}
+                        >
+                          {gift.gifted ? "🎂 Gifted 🎂" : "Not Gifted"}
+                        </button>
+                      )}
+                    </div>
                   </li>
-                </ul>
-              );
-            })}
+                );
+              })}
+          </ul>
         </div>
       )}
     </div>
