@@ -27,6 +27,9 @@ export default function NewGuidePage() {
       });
       const data = await GPTresponse.json();
       const giftsResponse = data.result.choices[0].text;
+      // Add or send to a function that processes the
+      // gifts response list and posts each gift into
+      // the database
     } catch (error) {
       alert("Error fetching gifts!");
       console.log(error);
@@ -45,7 +48,10 @@ export default function NewGuidePage() {
         </div>
       ) : (
         <div>
-          <h1>Let&apos;s get started! Answer the questions below.</h1>
+          <h1>
+            Let&apos;s get started! Tell us about the person you&apos;re
+            shopping for.
+          </h1>
           <InputForm
             newInquiryCreated={newInquiryCreated}
             requestGifts={requestGiftsFromGPT}

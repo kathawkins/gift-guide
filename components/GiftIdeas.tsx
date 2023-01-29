@@ -25,21 +25,20 @@ export default function GiftIdeas({
         .from("gifts")
         .update({ gifted: !gift.gifted })
         .eq("id", gift.id);
-      setGifts(
-        gifts.map((giftElement) => {
-          if (giftElement.id == gift.id) {
-            return { ...giftElement, gifted: !giftElement.gifted };
-          } else {
-            return giftElement;
-          }
-        })
-      );
+      const updatedGifts = gifts.map((giftRecord) => {
+        if (giftRecord.id === gift.id) {
+          return { ...giftRecord, gifted: !giftRecord.gifted };
+        } else {
+          return giftRecord;
+        }
+      });
+      setGifts(updatedGifts);
 
       if (error) {
         throw error;
       }
     } catch (error) {
-      alert("Error loading user data!");
+      alert("Error updating gift status!");
       console.log(error);
     }
   }
@@ -67,7 +66,7 @@ export default function GiftIdeas({
           );
         }
       } catch (error) {
-        alert("Error loading user data!");
+        alert("Error loading gifts!");
         console.log(error);
       } finally {
         setLoading(false);

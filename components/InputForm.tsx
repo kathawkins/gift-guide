@@ -148,7 +148,7 @@ export default function InputForm({
       profile_id,
     }: newInquiry) => {
       let finalPrompt = "";
-      if (!r_occupation) {
+      if (!r_occupation || r_occupation === "none") {
         finalPrompt.concat("");
         finalPrompt =
           "Provide a list of 10 " +
@@ -278,7 +278,9 @@ export default function InputForm({
 
   return (
     <form className="form-control text-xs max-w-xl" onSubmit={onFormSubmit}>
-      <label htmlFor="title">Title:</label>
+      <label htmlFor="title">
+        Title (ex. &quot;Gift for Mom&apos;s 50th&quot;)
+      </label>
       <input
         type="text"
         id="title"
@@ -335,9 +337,15 @@ export default function InputForm({
         value={formFields.occupation}
       />
       <datalist id="occupation">
+        <option>None</option>
+        <option>Student</option>
+        <option>Chef</option>
         <option>Accountant</option>
         <option>Doctor</option>
         <option>Teacher</option>
+        <option>Entrepreneur</option>
+        <option>Software Developer</option>
+        <option>Realtor</option>
       </datalist>
       <label>Recipient&apos;s Interests</label>
       <input
