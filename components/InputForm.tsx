@@ -123,7 +123,7 @@ export default function InputForm({
         })
         .join(" ");
     } else {
-      formattedTitle = userInput.toLowerCase();
+      formattedTitle = userInput.charAt(0).toUpperCase() + userInput.slice(1);
     }
     return formattedTitle;
   };
@@ -343,6 +343,7 @@ export default function InputForm({
       <datalist id="occupation">
         <option>None</option>
         <option>Student</option>
+        <option>Retired ...</option>
         <option>Chef</option>
         <option>Accountant</option>
         <option>Doctor</option>
@@ -350,6 +351,12 @@ export default function InputForm({
         <option>Entrepreneur</option>
         <option>Software Developer</option>
         <option>Realtor</option>
+        <option>Firefighter</option>
+        <option>Artist</option>
+        <option>Nurse</option>
+        <option>Architect</option>
+        <option>Consultant</option>
+        <option>Writer</option>
       </datalist>
       <label>Recipient&apos;s Interests</label>
       <input
@@ -365,6 +372,24 @@ export default function InputForm({
         <option>Sports</option>
         <option>Travel</option>
         <option>Art</option>
+        <option>Beer</option>
+        <option>Pets</option>
+        <option>Home Decor</option>
+        <option>Jewelry</option>
+        <option>Food</option>
+        <option>Fashion</option>
+        <option>Coffee</option>
+        <option>Games</option>
+        <option>Whiskey</option>
+        <option>Tech</option>
+        <option>Self-care</option>
+        <option>Movies</option>
+        <option>Wine</option>
+        <option>Video Games</option>
+        <option>Wine</option>
+        <option>TV</option>
+        <option>Music</option>
+        <option>Yoga</option>
       </datalist>
       <input
         type="text"
@@ -378,6 +403,24 @@ export default function InputForm({
         <option>Sports</option>
         <option>Travel</option>
         <option>Art</option>
+        <option>Beer</option>
+        <option>Pets</option>
+        <option>Home Decor</option>
+        <option>Jewelry</option>
+        <option>Food</option>
+        <option>Fashion</option>
+        <option>Coffee</option>
+        <option>Games</option>
+        <option>Whiskey</option>
+        <option>Tech</option>
+        <option>Self-care</option>
+        <option>Movies</option>
+        <option>Wine</option>
+        <option>Video Games</option>
+        <option>Wine</option>
+        <option>TV</option>
+        <option>Music</option>
+        <option>Yoga</option>
       </datalist>
       <input
         type="text"
@@ -391,6 +434,24 @@ export default function InputForm({
         <option>Sports</option>
         <option>Travel</option>
         <option>Art</option>
+        <option>Beer</option>
+        <option>Pets</option>
+        <option>Home Decor</option>
+        <option>Jewelry</option>
+        <option>Food</option>
+        <option>Fashion</option>
+        <option>Coffee</option>
+        <option>Games</option>
+        <option>Whiskey</option>
+        <option>Tech</option>
+        <option>Self-care</option>
+        <option>Movies</option>
+        <option>Wine</option>
+        <option>Video Games</option>
+        <option>Wine</option>
+        <option>TV</option>
+        <option>Music</option>
+        <option>Yoga</option>
       </datalist>
       <label htmlFor="hobbies">Recipient&apos;s Hobbies</label>
       <input
@@ -406,6 +467,24 @@ export default function InputForm({
         <option>Cooking</option>
         <option>Gardening</option>
         <option>Fishing</option>
+        <option>Hiking</option>
+        <option>Gaming</option>
+        <option>Camping</option>
+        <option>Volunteering</option>
+        <option>Cycling</option>
+        <option>Farming</option>
+        <option>Rock Climbing</option>
+        <option>Traveling</option>
+        <option>Performing Arts</option>
+        <option>Reading</option>
+        <option>Photography</option>
+        <option>Writing</option>
+        <option>Running</option>
+        <option>Drawing</option>
+        <option>Knitting</option>
+        <option>Painting</option>
+        <option>Weightlifting</option>
+        <option>Crafting</option>
       </datalist>
       <input
         type="text"
@@ -419,6 +498,24 @@ export default function InputForm({
         <option>Cooking</option>
         <option>Gardening</option>
         <option>Fishing</option>
+        <option>Hiking</option>
+        <option>Gaming</option>
+        <option>Camping</option>
+        <option>Volunteering</option>
+        <option>Cycling</option>
+        <option>Farming</option>
+        <option>Rock Climbing</option>
+        <option>Traveling</option>
+        <option>Performing Arts</option>
+        <option>Reading</option>
+        <option>Photography</option>
+        <option>Writing</option>
+        <option>Running</option>
+        <option>Drawing</option>
+        <option>Knitting</option>
+        <option>Painting</option>
+        <option>Weightlifting</option>
+        <option>Crafting</option>
       </datalist>
       <input
         type="text"
@@ -432,6 +529,24 @@ export default function InputForm({
         <option>Cooking</option>
         <option>Gardening</option>
         <option>Fishing</option>
+        <option>Hiking</option>
+        <option>Gaming</option>
+        <option>Camping</option>
+        <option>Volunteering</option>
+        <option>Cycling</option>
+        <option>Farming</option>
+        <option>Rock Climbing</option>
+        <option>Traveling</option>
+        <option>Performing Arts</option>
+        <option>Reading</option>
+        <option>Photography</option>
+        <option>Writing</option>
+        <option>Running</option>
+        <option>Drawing</option>
+        <option>Knitting</option>
+        <option>Painting</option>
+        <option>Weightlifting</option>
+        <option>Crafting</option>
       </datalist>
       <label htmlFor="occasion">Gift Occasion</label>
       <input
@@ -446,6 +561,9 @@ export default function InputForm({
         <option>Birthday</option>
         <option>Anniversary</option>
         <option>Graduation</option>
+        <option>Wedding</option>
+        <option>Holiday</option>
+        <option>&quot;Just Because&quot;</option>
       </datalist>
       <label>Desired Price Range</label>
       <div className="columns-2 max-w-xs">

@@ -9,25 +9,25 @@ import Link from "next/link";
 import GiftIdeas from "../components/GiftIdeas";
 import InputForm from "../components/InputForm";
 import { Database } from "../types/supabase";
-// import { userAgent } from "next/server";
 type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
-// type Gift = Database["public"]["Tables"]["gifts"]["Row"];
 
 export default function NewGuidePage() {
   const session = useSession();
   const supabase = useSupabaseClient();
-  const [loading, setLoading] = useState(true);
-
+  const [loading, setLoading] = useState(false);
   const user = useUser();
-  const [inquiryID, setInquiryID] = useState<number | null>(null);
+  const [newInquiry, setNewInquiry] = useState<Inquiry | null>(null);
   const [showGifts, setShowGifts] = useState<boolean>(false);
 
   const newInquiryCreated = (response_data: Inquiry) => {
-    setInquiryID(response_data.id);
+    setNewInquiry(response_data);
   };
 
-  async function requestGiftsFromGPT(prompt: string, newID: number) {
+  async function requestGiftsFromGPT(prompt: string, newInquiryID: number) {
     try {
+      setLoading(true);
+      setShowGifts(false);
+
       const GPTresponse = await fetch("/api/OpenAI", {
         method: "POST",
         headers: {
@@ -38,7 +38,7 @@ export default function NewGuidePage() {
       const data = await GPTresponse.json();
       const giftsResponse = data.result.choices[0].text;
       const giftList = formatGiftsResponse(giftsResponse);
-      saveGifts(giftList, newID);
+      saveGifts(giftList, newInquiryID);
     } catch (error) {
       alert("Error fetching gifts!");
       console.log(error);
@@ -58,17 +58,15 @@ export default function NewGuidePage() {
       );
   };
 
-  async function saveGifts(gifts: string[], newID: number) {
+  async function saveGifts(gifts: string[], newInquiryID: number) {
     if (!gifts) {
       console.error("No gifts to save");
     }
     for (let gift of gifts) {
       try {
-        setLoading(true);
-
         if (!user) throw new Error("No user");
         let { error } = await supabase.from("gifts").insert({
-          inquiry_id: newID,
+          inquiry_id: newInquiryID,
           description: gift,
           profile_id: user.id,
         });
@@ -81,7 +79,6 @@ export default function NewGuidePage() {
       }
     }
     setLoading(false);
-
     setShowGifts(true);
   }
 
@@ -108,15 +105,17 @@ export default function NewGuidePage() {
           <div>
             {loading ? (
               <div>
-                <h1>Loading...</h1>
+                <h1>Loading gifts for {newInquiry?.title}!...</h1>
               </div>
             ) : (
               <div>
-                {inquiryID && showGifts && (
+                {newInquiry && showGifts && (
                   <div>
-                    <h2 className="text-red-500">Your Gift Guide:</h2>
+                    <h2 className="text-red-500">
+                      Gift Guide for {newInquiry.title}:
+                    </h2>
                     <GiftIdeas
-                      inquiryID={inquiryID}
+                      inquiryID={newInquiry.id}
                       giftedFunctionality={false}
                     ></GiftIdeas>
                   </div>

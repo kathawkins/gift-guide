@@ -71,7 +71,7 @@ export default function Inquiries({
           setUsername(data.username);
         }
       } catch (error) {
-        alert("Error loading user data!");
+        alert("Error getting username!");
         console.log(error);
       }
     }
@@ -91,7 +91,7 @@ export default function Inquiries({
           setInquiries(data);
         }
       } catch (error) {
-        alert("Error loading user data!");
+        alert("Error loading gift guides!");
         console.log(error);
       } finally {
         setLoading(false);

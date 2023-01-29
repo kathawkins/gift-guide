@@ -58,7 +58,12 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
                       Price Range: ${inquiry.g_price_low}-{inquiry.g_price_high}
                     </p>
                     <p>Age: {inquiry.r_age}</p>
-                    <p>Occupation: {inquiry.r_occupation}</p>
+
+                    {inquiry.r_occupation ? (
+                      <p> Occupation: {inquiry.r_occupation}</p>
+                    ) : (
+                      <p> Occupation: (not included)</p>
+                    )}
                     <p>Hobbies: {inquiry.r_hobbies}</p>
                     <p>Interests: {inquiry.r_interests}</p>
                   </div>
