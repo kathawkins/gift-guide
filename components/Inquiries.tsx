@@ -7,7 +7,7 @@ type Profiles = Database["public"]["Tables"]["profiles"]["Row"];
 export default function Inquiries({
   setInquiry,
 }: {
-  setInquiry: (id: number) => void;
+  setInquiry: (id: number | null) => void;
 }) {
   const supabase = useSupabaseClient<Database>();
   const [loading, setLoading] = useState(true);
@@ -42,7 +42,7 @@ export default function Inquiries({
         (inquiryRecord) => inquiryRecord.id != inquiry.id
       );
       setInquiries(updatedInquiries);
-      setInquiry(inquiry.id);
+      setInquiry(null);
       if (error) {
         throw error;
       }
@@ -88,7 +88,6 @@ export default function Inquiries({
         }
 
         if (data) {
-          // console.log(data)
           setInquiries(data);
         }
       } catch (error) {

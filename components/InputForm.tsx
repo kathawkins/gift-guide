@@ -165,7 +165,7 @@ export default function InputForm({
           r_interests +
           " and their hobbies are " +
           r_hobbies +
-          ".";
+          ". The list should formatted numerically like: '1. suggestion A...\n2. suggestion B...\n 3. suggestion C....' and so forth";
       } else {
         finalPrompt =
           "Provide a list of 10 " +
@@ -184,7 +184,7 @@ export default function InputForm({
           r_interests +
           " and their hobbies are " +
           r_hobbies +
-          ".";
+          ". The list should formatted numerically like: '1. suggestion A\n2. suggestion B\n 3. suggestion C' and so forth";
       }
       return finalPrompt;
     };
@@ -211,9 +211,9 @@ export default function InputForm({
       profile_id: user.id,
     };
 
-    createInquiry(inquiryData);
+    const giftRequestPrompt = createGPTPrompt(inquiryData);
 
-    requestGifts(createGPTPrompt(inquiryData));
+    saveInquiry(inquiryData, giftRequestPrompt);
 
     setformFields({
       title: "",
@@ -232,18 +232,21 @@ export default function InputForm({
     });
   };
 
-  async function createInquiry({
-    title,
-    r_relationship,
-    r_age,
-    r_occupation,
-    r_interests,
-    r_hobbies,
-    g_occasion,
-    g_price_low,
-    g_price_high,
-    profile_id,
-  }: newInquiry) {
+  async function saveInquiry(
+    {
+      title,
+      r_relationship,
+      r_age,
+      r_occupation,
+      r_interests,
+      r_hobbies,
+      g_occasion,
+      g_price_low,
+      g_price_high,
+      profile_id,
+    }: newInquiry,
+    prompt: string
+  ) {
     try {
       if (!user) throw new Error("No user");
 
@@ -269,9 +272,10 @@ export default function InputForm({
 
       if (data) {
         newInquiryCreated(data[0]);
+        requestGifts(prompt, data[0].id);
       }
     } catch (error) {
-      alert("Error loading user data!");
+      alert("Error saving gift guide to profile!");
       console.log(error);
     }
   }
@@ -279,7 +283,7 @@ export default function InputForm({
   return (
     <form className="form-control text-xs max-w-xl" onSubmit={onFormSubmit}>
       <label htmlFor="title">
-        Title (ex. &quot;Gift for Mom&apos;s 50th&quot;)
+        Title (e.g. &quot;Gift for Mom&apos;s 50th&quot;)
       </label>
       <input
         type="text"
