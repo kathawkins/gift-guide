@@ -5,6 +5,7 @@ import Link from "next/link";
 import Inquiries from "../components/Inquiries";
 import UserInputs from "@/components/UserInputs";
 import GiftIdeas from "@/components/GiftIdeas";
+import Image from "next/image";
 
 export default function SavedGuidesPage() {
   const session = useSession();
@@ -57,6 +58,15 @@ export default function SavedGuidesPage() {
           </div>
         </div>
       )}
+      <div className="grid justify-center max-w-5xl mx-auto mb-20">
+        <Image
+          priority
+          src="/images/gift.png"
+          height={108}
+          width={108}
+          alt="gift logo"
+        />
+      </div>
     </div>
   );
 }

@@ -124,7 +124,7 @@ export default function Inquiries({
                       <input
                         type="radio"
                         name="radio-1"
-                        className="radio radio-primary radio-sm mr-2"
+                        className="radio radio-primary radio-sm mr-2 my-auto"
                         onClick={() => setInquiry(inquiry.id)}
                       ></input>
                       {inquiry.title}

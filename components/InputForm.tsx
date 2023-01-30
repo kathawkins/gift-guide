@@ -323,11 +323,10 @@ export default function InputForm({
         onChange={onAgeChange}
         value={formFields.age}
         required
-        className="input input-primary input-bordered w-full"
+        className="input input-primary input-bordered w-full text-[#9DA3AE]"
       >
-        {/* Change disabled select text to match other placeholders */}
         <option disabled value="">
-          Choose from the dropdown
+          Choose from our list
         </option>
         <option>Baby</option>
         <option>Kid</option>

@@ -12,4 +12,14 @@ module.exports = {
     extend: {},
   },
   plugins: [require("daisyui")],
+  // daisyui: {
+  //   themes: [
+  //     {
+  //       cupcake: {
+  //         ...require("daisyui/src/colors/themes")["[data-theme=cupcake]"],
+  //         "base-100": "rgb(243,216,32)",
+  //       },
+  //     },
+  //   ],
+  // },
 };

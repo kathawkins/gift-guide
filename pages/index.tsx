@@ -2,6 +2,7 @@ import { Auth, ThemeSupa, ThemeMinimal } from "@supabase/auth-ui-react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import Account from "../components/Account";
+import Image from "next/image";
 
 const Home = () => {
   const session = useSession();
@@ -9,8 +10,19 @@ const Home = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-10 ml-10">GIFT GUIDE</h1>
-      <div className="grid grid-cols-2 my-10 mx-auto max-w-4xl">
+      <div className="grid justify-center max-w-5xl mx-auto">
+        <Image
+          priority
+          src="/images/gift.png"
+          height={208}
+          width={208}
+          alt="gift logo"
+        />
+      </div>
+      <h1 className="grid grid-cols-2 text-5xl font-bold mt-10 max-w-5xl mx-auto">
+        <div className="grid content-center">GIFT GUIDE</div>
+      </h1>
+      <div className="grid grid-cols-2 my-10 mx-auto max-w-4xl content-center">
         <h2 className="grid text-3xl">
           Unwrap the Perfect Gift with Our AI-Powered Gift Suggester
         </h2>
@@ -49,11 +61,20 @@ const Home = () => {
             </Link>
           </div>
           <div className="grid grid-flow-row auto-rows-max ml-10 mb-20">
-            <h3 className="text-xl font-bold mt-10">Account Details:</h3>
+            <h3 className="text-xl font-bold mt-20">Account Details:</h3>
             <Account session={session} />
           </div>
         </div>
       )}
+      <div className="grid justify-center max-w-5xl mx-auto mb-20">
+        <Image
+          priority
+          src="/images/gift.png"
+          height={108}
+          width={108}
+          alt="gift logo"
+        />
+      </div>
     </div>
   );
 };

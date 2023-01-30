@@ -10,6 +10,7 @@ import GiftIdeas from "../components/GiftIdeas";
 import InputForm from "../components/InputForm";
 import { Database } from "../types/supabase";
 type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
+import Image from "next/image";
 
 export default function NewGuidePage() {
   const session = useSession();
@@ -164,6 +165,15 @@ export default function NewGuidePage() {
           </div>
         </div>
       )}
+      <div className="grid justify-center max-w-5xl mx-auto mb-20">
+        <Image
+          priority
+          src="/images/gift.png"
+          height={108}
+          width={108}
+          alt="gift logo"
+        />
+      </div>
     </div>
   );
 }
