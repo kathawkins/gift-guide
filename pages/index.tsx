@@ -69,7 +69,7 @@ const Home = () => {
       <div className="grid justify-center max-w-5xl mx-auto mb-20">
         <Image
           priority
-          src="/images/gift.png"
+          src="/images/Gift.png"
           height={108}
           width={108}
           alt="gift logo"
