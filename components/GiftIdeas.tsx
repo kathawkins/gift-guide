@@ -84,7 +84,6 @@ export default function GiftIdeas({
         </div>
       ) : (
         <div>
-          <h2 className="text-lg">Suggested Gifts:</h2>
           <ul>
             {gifts &&
               gifts.map((gift, index) => {

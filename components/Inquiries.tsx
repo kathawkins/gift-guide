@@ -112,19 +112,26 @@ export default function Inquiries({
           <h2 className="text-2xl">
             {username ? username : "User"}&apos;s Previous Gift Guides:
           </h2>
-          <ul>
+          <ul className="mt-5">
             {inquiries &&
               inquiries.map((inquiry) => {
                 return (
                   <li
                     key={inquiry.id}
-                    className="text-lg grid grid-cols-2 gap-2 my-1"
-                    onClick={() => setInquiry(inquiry.id)}
+                    className="text-lg grid grid-cols-3 gap-2 my-1 items-center h-fit"
                   >
-                    <div className="grid content-center">{inquiry.title}</div>
-                    <div className="max-w-xs grid justify-end">
+                    <div className="flex col-span-2">
+                      <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio radio-primary radio-sm mr-2"
+                        onClick={() => setInquiry(inquiry.id)}
+                      ></input>
+                      {inquiry.title}
+                    </div>
+                    <div className="grid justify-end max-w-xs">
                       <button
-                        className="btn btn-secondary btn-outline"
+                        className="btn btn-secondary btn-outline btn-sm text-xs h-fit"
                         onClick={() => deleteInquiryAndGifts(inquiry)}
                       >
                         Delete from Profile

@@ -79,7 +79,7 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto ">
+    <div className="mt-2">
       <div>
         <label className="text-lg" htmlFor="email">
           Email{" "}
@@ -101,7 +101,7 @@ export default function Account({ session }: { session: Session }) {
           type="text"
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
-          className="input input-secondary input-bordered w-s"
+          className="input input-secondary input-bordered w-s mt-2"
         />
       </div>
       <div>
@@ -113,10 +113,10 @@ export default function Account({ session }: { session: Session }) {
           type="full_name"
           value={full_name || ""}
           onChange={(e) => setFullName(e.target.value)}
-          className="input input-secondary input-bordered w-s"
+          className="input input-secondary input-bordered w-s mt-2"
         />
       </div>
-      <div>
+      <div className="grid grid-cols-2 gap-2 max-w-xs mt-2">
         <button
           className="btn btn-secondary"
           onClick={() => updateProfile({ username, full_name, avatar_url })}

@@ -17,7 +17,22 @@ export default function NewGuidePage() {
   const [loading, setLoading] = useState(false);
   const user = useUser();
   const [newInquiry, setNewInquiry] = useState<Inquiry | null>(null);
-  const [showGifts, setShowGifts] = useState<boolean>(false);
+  // For testing UI with rendered gift list:
+  // const newInquiry = {
+  //   id: 49,
+  //   created_at: "2023-01-29T20:36:30.203317+00:00",
+  //   profile_id: "d3f216a3-255d-4540-bfb9-fa7251b23d5c",
+  //   title: "Ben's 32nd Birthday",
+  //   r_relationship: "spouse",
+  //   r_age: "young adult",
+  //   r_interests: "video games, rap music, and beer",
+  //   r_hobbies: "mountain biking, skiing, and cooking",
+  //   r_occupation: "software developer",
+  //   g_occasion: "birthday",
+  //   g_price_low: 50,
+  //   g_price_high: 100,
+  // };
+  const [showGifts, setShowGifts] = useState<boolean>(true);
 
   const newInquiryCreated = (response_data: Inquiry) => {
     setNewInquiry(response_data);
@@ -40,7 +55,7 @@ export default function NewGuidePage() {
       const giftList = formatGiftsResponse(giftsResponse);
       saveGifts(giftList, newInquiryID);
     } catch (error) {
-      alert("Error fetching gifts!");
+      alert("Error fetching gifts from Open AI! Please try again.");
       console.log(error);
     }
   }
@@ -84,9 +99,10 @@ export default function NewGuidePage() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold">GIFT GUIDE</h1>
+      <h1 className="text-4xl font-bold mt-10 ml-10">GIFT GUIDE</h1>
       {!session ? (
         <div className="mx-auto max-w-xl">
+          Log in here to create a new gift guide!
           <Auth
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
@@ -95,8 +111,20 @@ export default function NewGuidePage() {
         </div>
       ) : (
         <div>
-          <h2 className="text-2xl">
-            Let&apos;s get started! Tell us about the person you&apos;re
+          <div className="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-10">
+            <Link href="/" type="button" className="btn btn-primary">
+              Go to Homepage
+            </Link>
+            <Link
+              href="/savedGuidesPage"
+              type="button"
+              className="btn btn-primary"
+            >
+              Go to Saved Gift Guides
+            </Link>
+          </div>
+          <h2 className="text-2xl mt-10 ml-10">
+            Ready to find the perfect gift? Tell us about the person you&apos;re
             shopping for.
           </h2>
           <InputForm
@@ -106,33 +134,33 @@ export default function NewGuidePage() {
           <div>
             {loading ? (
               <div>
-                <h3>Loading gifts for {newInquiry?.title}!...</h3>
+                <h3 className="text-2xl mt-5 mb-20 ml-10">
+                  Loading gifts for {newInquiry?.title}!...
+                </h3>
               </div>
             ) : (
-              <div>
+              <div className="mb-20 ml-10">
                 {newInquiry && showGifts && (
-                  <div>
-                    <h2 className="text-red-500">
+                  <div className="mt-5">
+                    <h2 className="text-2xl">
                       Gift Guide for {newInquiry.title}:
                     </h2>
                     <GiftIdeas
                       inquiryID={newInquiry.id}
                       giftedFunctionality={false}
                     ></GiftIdeas>
+                    <p className="flex text-3xl mt-5 mx-auto justify-center">
+                      We hope these suggestions are helpful!
+                    </p>
+                    <div className="flex mt-2 mx-auto justify-center max-w-sm">
+                      This guide has been saved to your profile! You can go to
+                      the Saved Guides page to see notes and track the status of
+                      each gift.
+                    </div>
                   </div>
                 )}
               </div>
             )}
-          </div>
-          <div>
-            <Link href="/savedGuidesPage">
-              <button className="btn btn-primary">
-                Go to Saved Gift Guides
-              </button>
-            </Link>
-            <Link href="/">
-              <button className="btn btn-primary">Go to Homepage</button>
-            </Link>
           </div>
         </div>
       )}
