@@ -44,7 +44,7 @@ export default function Account({ session }: { session: Session }) {
       }
     }
     getProfile();
-  }, [session]);
+  }, [session, supabase, user]);
 
   async function updateProfile({
     username,

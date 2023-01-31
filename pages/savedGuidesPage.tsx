@@ -14,7 +14,14 @@ export default function SavedGuidesPage() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-10 ml-10">GIFT GUIDE</h1>
+      <Image
+        priority
+        src="/images/logo_.jpg"
+        height={153}
+        width={431}
+        alt="Gift Guide logo"
+        className="flex text-5xl font-bold mt-10 mx-10"
+      ></Image>
       {!session ? (
         <div className="mx-auto max-w-xl">
           Log in here to see gift guides!
@@ -27,13 +34,13 @@ export default function SavedGuidesPage() {
       ) : (
         <div>
           <div className="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-10">
-            <Link href="/" type="button" className="btn btn-primary">
+            <Link href="/" type="button" className="btn btn-primary btn-sm">
               Go to Homepage
             </Link>
             <Link
               href="/newGuidePage"
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
             >
               Create a New Gift Guide
             </Link>
@@ -49,7 +56,7 @@ export default function SavedGuidesPage() {
                 </h3>
               )}
               {inquiryID && (
-                <div className="mb-20">
+                <div className="mt-11 mb-20">
                   <UserInputs inquiryID={inquiryID} />
                   <GiftIdeas inquiryID={inquiryID} giftedFunctionality={true} />
                 </div>

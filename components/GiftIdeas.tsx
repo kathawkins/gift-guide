@@ -86,21 +86,68 @@ export default function GiftIdeas({
         <div>
           <ul>
             {gifts &&
+              !giftedFunctionality &&
+              gifts.map((gift) => {
+                return (
+                  <li key={gift.id} className="flex my-1 gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    {gift.description}
+                  </li>
+                );
+              })}
+            {gifts &&
+              giftedFunctionality &&
               gifts.map((gift, index) => {
                 return (
                   <li key={gift.id} className="grid my-1 grid-cols-2 gap-2">
-                    <div className="grid content-center">
+                    <div className="grid content-center p-2">
                       {index + 1}. {gift.description}
                     </div>
-                    <div className="max-w-xs grid justify-end">
-                      {giftedFunctionality && (
-                        <button
-                          className="btn btn-secondary"
+                    <div className="grid form-control">
+                      <label className="flex cursor-pointer my-auto justify-end mr-5">
+                        <span className="label-text text-xs text-secondary mr-1">
+                          {gift.gifted ? (
+                            <span className="flex">
+                              <svg
+                                className="w-6 h-6 mr-1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1}
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                                />
+                              </svg>
+                              <span className="my-auto">Gifted</span>
+                            </span>
+                          ) : (
+                            <span className="my-auto">Not Gifted</span>
+                          )}
+                        </span>
+                        <input
+                          type="checkbox"
+                          className="toggle toggle-secondary toggle-xs my-auto"
                           onClick={() => updateGiftedStatus(gift)}
-                        >
-                          {gift.gifted ? "🎂 Gifted 🎂" : "Not Gifted"}
-                        </button>
-                      )}
+                          checked={gift.gifted}
+                        />
+                      </label>
                     </div>
                   </li>
                 );

@@ -109,8 +109,9 @@ export default function Inquiries({
         </div>
       ) : (
         <div>
-          <h2 className="text-2xl">
-            {username ? username : "User"}&apos;s Previous Gift Guides:
+          <h2 className="text-2xl ml-5">
+            <span className="font-bold">{username ? username : "User"}</span>
+            &apos;s Previous Gift Guides:
           </h2>
           <ul className="mt-5">
             {inquiries &&
@@ -118,16 +119,18 @@ export default function Inquiries({
                 return (
                   <li
                     key={inquiry.id}
-                    className="text-lg grid grid-cols-3 gap-2 my-1 items-center h-fit"
+                    className="grid grid-cols-3 gap-2 my-1 items-center ml-5"
                   >
                     <div className="flex col-span-2">
-                      <input
-                        type="radio"
-                        name="radio-1"
-                        className="radio radio-primary radio-sm mr-2 my-auto"
-                        onClick={() => setInquiry(inquiry.id)}
-                      ></input>
-                      {inquiry.title}
+                      <label className="flex cursor-pointer">
+                        <input
+                          type="radio"
+                          name="radio-1"
+                          className="radio radio-primary radio-sm mr-2 my-auto"
+                          onClick={() => setInquiry(inquiry.id)}
+                        ></input>
+                        <span>{inquiry.title}</span>
+                      </label>
                     </div>
                     <div className="grid justify-end max-w-xs">
                       <button

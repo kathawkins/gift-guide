@@ -281,7 +281,10 @@ export default function InputForm({
   }
 
   return (
-    <form className="form-control max-w-3xl mx-auto" onSubmit={onFormSubmit}>
+    <form
+      className="form-control max-w-2xl mx-auto px-5 justify-self-center"
+      onSubmit={onFormSubmit}
+    >
       <label htmlFor="title" className="text-lg font-bold mt-5">
         Title
       </label>
@@ -626,7 +629,7 @@ export default function InputForm({
       <input
         type="submit"
         value="Submit"
-        className="btn my-2 btn-secondary"
+        className="btn my-5 btn-secondary"
       ></input>
     </form>
   );

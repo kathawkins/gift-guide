@@ -35,15 +35,12 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
   }, [inquiryID, supabase, user]);
 
   return (
-    <div className="mt-10">
+    <div className="mt-2">
       {inquiries &&
         inquiries.map((inquiry) => {
           return (
             <div key={inquiry.id}>
-              <h2 className="text-lg">
-                Your {inquiry.r_relationship}&apos;s gift guide:
-              </h2>
-              <div className="text-xs mt-2 mb-5">
+              <div className="text-xs mt-2 mb-5 bg-base-200 mr-5 p-1">
                 <p>Title: {inquiry.title}</p>
                 <p>Occasion: {inquiry.g_occasion}</p>
                 <p>

@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import GiftIdeas from "../components/GiftIdeas";
 import InputForm from "../components/InputForm";
+import UserInputs from "@/components/UserInputs";
 import { Database } from "../types/supabase";
 type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
 import Image from "next/image";
@@ -19,7 +20,7 @@ export default function NewGuidePage() {
   const user = useUser();
   const [newInquiry, setNewInquiry] = useState<Inquiry | null>(null);
   // For testing UI with rendered gift list:
-  // const newInquiry = {
+  // const [newInquiry, setNewInquiry] = useState<Inquiry | null>({
   //   id: 49,
   //   created_at: "2023-01-29T20:36:30.203317+00:00",
   //   profile_id: "d3f216a3-255d-4540-bfb9-fa7251b23d5c",
@@ -32,13 +33,17 @@ export default function NewGuidePage() {
   //   g_occasion: "birthday",
   //   g_price_low: 50,
   //   g_price_high: 100,
-  // };
-  const [showGifts, setShowGifts] = useState<boolean>(true);
+  // });
+  const [showGifts, setShowGifts] = useState<boolean>(false);
 
   const newInquiryCreated = (response_data: Inquiry) => {
     setNewInquiry(response_data);
   };
 
+  const refreshPage = () => {
+    setNewInquiry(null);
+    setShowGifts(false);
+  };
   async function requestGiftsFromGPT(prompt: string, newInquiryID: number) {
     try {
       setLoading(true);
@@ -100,7 +105,14 @@ export default function NewGuidePage() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold mt-10 ml-10">GIFT GUIDE</h1>
+      <Image
+        priority
+        src="/images/logo_.jpg"
+        height={153}
+        width={431}
+        alt="Gift Guide logo"
+        className="flex text-5xl font-bold mt-10 mx-10"
+      ></Image>
       {!session ? (
         <div className="mx-auto max-w-xl">
           Log in here to create a new gift guide!
@@ -113,25 +125,31 @@ export default function NewGuidePage() {
       ) : (
         <div>
           <div className="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-10">
-            <Link href="/" type="button" className="btn btn-primary">
+            <Link href="/" type="button" className="btn btn-primary btn-sm">
               Go to Homepage
             </Link>
             <Link
               href="/savedGuidesPage"
               type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
             >
               Go to Saved Gift Guides
             </Link>
           </div>
-          <h2 className="text-2xl mt-10 ml-10">
-            Ready to find the perfect gift? Tell us about the person you&apos;re
-            shopping for.
-          </h2>
-          <InputForm
-            newInquiryCreated={newInquiryCreated}
-            requestGifts={requestGiftsFromGPT}
-          ></InputForm>
+
+          {!showGifts && (
+            <div>
+              <h2 className="text-2xl mt-10 ml-10">
+                Ready to find the perfect gift? Tell us about the person
+                you&apos;re shopping for.
+              </h2>
+              <InputForm
+                newInquiryCreated={newInquiryCreated}
+                requestGifts={requestGiftsFromGPT}
+              ></InputForm>
+            </div>
+          )}
+
           <div>
             {loading ? (
               <div>
@@ -143,13 +161,24 @@ export default function NewGuidePage() {
               <div className="mb-20 ml-10">
                 {newInquiry && showGifts && (
                   <div className="mt-5">
-                    <h2 className="text-2xl">
-                      Gift Guide for {newInquiry.title}:
+                    <div className="flex justify-center mr-10">
+                      <button
+                        className="btn btn-secondary mb-5 btn-lg"
+                        onClick={() => refreshPage()}
+                      >
+                        Click here to make a new Gift Guide
+                      </button>
+                    </div>
+                    <h2 className="flex text-2xl justify-center mr-10">
+                      Gift Guide for {newInquiry.title}
                     </h2>
-                    <GiftIdeas
-                      inquiryID={newInquiry.id}
-                      giftedFunctionality={false}
-                    ></GiftIdeas>
+                    <div className="max-w-lg mx-auto">
+                      <UserInputs inquiryID={newInquiry.id} />
+                      <GiftIdeas
+                        inquiryID={newInquiry.id}
+                        giftedFunctionality={false}
+                      ></GiftIdeas>
+                    </div>
                     <p className="flex text-3xl mt-5 mx-auto justify-center">
                       We hope these suggestions are helpful!
                     </p>
