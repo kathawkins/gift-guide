@@ -110,9 +110,14 @@ export default function Inquiries({
       ) : (
         <div>
           <h2 className="text-2xl">
-            <span className="font-bold">{username ? username : "User"}</span>
-            &apos;s Previous Gift Guides:
+            <span className="font-bold">
+              {username ? username + " " : "Your "}
+            </span>
+            Previous Gift Guides:
           </h2>
+          {inquiries && inquiries.length === 0 && (
+            <h3 className="mt-5 text-2xl">Make a new guide to see it here!</h3>
+          )}
           <ul className="mt-5">
             {inquiries &&
               inquiries.map((inquiry) => {

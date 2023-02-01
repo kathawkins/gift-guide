@@ -153,15 +153,15 @@ export default function NewGuidePage() {
           <div>
             {loading ? (
               <div>
-                <h3 className="text-2xl mt-5 mb-20 ml-10">
+                <h3 className="text-2xl mt-5 mb-20 mx-auto">
                   Loading gifts for {newInquiry?.title}!...
                 </h3>
               </div>
             ) : (
-              <div className="mb-20 ml-10">
+              <div className="mb-20 mx-10">
                 {newInquiry && showGifts && (
                   <div className="mt-5">
-                    <div className="flex justify-center mr-10">
+                    <div className="flex justify-center">
                       <button
                         className="btn btn-secondary mb-5 btn-lg"
                         onClick={() => refreshPage()}
@@ -169,7 +169,7 @@ export default function NewGuidePage() {
                         Click here to make a new Gift Guide
                       </button>
                     </div>
-                    <h2 className="flex text-2xl justify-center mr-10">
+                    <h2 className="flex text-2xl justify-center">
                       Gift Guide for {newInquiry.title}
                     </h2>
                     <div className="max-w-lg mx-auto">

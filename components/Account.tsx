@@ -80,43 +80,44 @@ export default function Account({ session }: { session: Session }) {
 
   return (
     <div className="mt-2">
-      <div>
-        <label className="text-lg" htmlFor="email">
-          Email{" "}
+      <div className="flex">
+        <label className="mr-1 my-auto" htmlFor="email">
+          Email
         </label>
         <input
           id="email"
           type="text"
           value={session.user.email}
           disabled
-          className="w-80 input input-primary input-bordered"
+          className="input input-secondary input-bordered w-full"
         />
       </div>
-      <div>
-        <label className="text-lg" htmlFor="username">
-          Username{" "}
+      <div className="flex">
+        <label className="mr-1 my-auto" htmlFor="username">
+          Username
         </label>
         <input
           id="username"
           type="text"
-          value={username || ""}
+          value={username || "Add a username"}
           onChange={(e) => setUsername(e.target.value)}
-          className="input input-secondary input-bordered w-s mt-2"
+          className="input input-secondary input-bordered mt-2"
+          maxLength={20}
         />
       </div>
-      <div>
-        <label className="text-lg" htmlFor="full_name">
-          Full Name{" "}
+      <div className="flex items-center">
+        <label className=" mr-1 my-auto" htmlFor="full_name">
+          Full Name
         </label>
         <input
           id="full_name"
           type="full_name"
-          value={full_name || ""}
+          value={full_name || "Add your name"}
           onChange={(e) => setFullName(e.target.value)}
-          className="input input-secondary input-bordered w-s mt-2"
+          className="input input-secondary input-bordered mt-2"
         />
       </div>
-      <div className="grid grid-cols-2 gap-2 max-w-xs mt-2">
+      <div className="grid grid-cols-2 gap-2 mt-5">
         <button
           className="btn btn-secondary"
           onClick={() => updateProfile({ username, full_name, avatar_url })}

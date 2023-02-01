@@ -282,23 +282,9 @@ export default function InputForm({
 
   return (
     <form
-      className="form-control max-w-2xl mx-auto px-5 justify-self-center"
+      className="form-control max-w-2xl mx-auto px-5 justify-self-center mt-5"
       onSubmit={onFormSubmit}
     >
-      <label htmlFor="title" className="text-lg font-bold mt-5">
-        Title
-      </label>
-      <input
-        type="text"
-        id="title"
-        name="title"
-        required
-        onChange={onTitleChange}
-        value={formFields.title}
-        maxLength={50}
-        placeholder='(e.g. "Gift for Mom&apos;s 50th")'
-        className="input input-primary input-bordered w-full"
-      ></input>
       <label className="text-lg font-bold mt-2">
         Relationship to Recipient
       </label>
@@ -327,12 +313,13 @@ export default function InputForm({
         onChange={onAgeChange}
         value={formFields.age}
         required
-        className="input input-primary input-bordered w-full text-[#9DA3AE]"
+        className="input input-primary input-bordered w-full "
+        placeholder="choose"
       >
-        <option disabled value="">
+        <option disabled value="" className="text-[#9DA3AE]">
           Choose from our list
         </option>
-        <option>Baby</option>
+        {/* <option>Baby</option> */}
         <option>Kid</option>
         <option>Teen</option>
         <option>Young Adult</option>
@@ -400,7 +387,6 @@ export default function InputForm({
             <option>Tech</option>
             <option>Self-care</option>
             <option>Movies</option>
-            <option>Wine</option>
             <option>Video Games</option>
             <option>Wine</option>
             <option>TV</option>
@@ -627,6 +613,20 @@ export default function InputForm({
           className="input input-primary input-bordered w-full"
         ></input>
       </div>
+      <label htmlFor="title" className="text-lg font-bold mt-2">
+        Gift Guide Title
+      </label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        required
+        onChange={onTitleChange}
+        value={formFields.title}
+        maxLength={50}
+        placeholder='(e.g. "Gift for Mom&apos;s 50th")'
+        className="input input-primary input-bordered w-full"
+      ></input>
       <input
         type="submit"
         value="Submit"

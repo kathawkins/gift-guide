@@ -10,14 +10,44 @@ const Home = () => {
 
   return (
     <div>
-      <Image
-        priority
-        src="/images/logo_.jpg"
-        height={153 * 1.5}
-        width={431 * 1.5}
-        alt="Gift Guide logo"
-        className="flex text-5xl font-bold mt-5 md:mx-10"
-      ></Image>
+      <div className="grid grid-cols-3 mt-5 mx-2 md:mx-10 gap-4">
+        <Image
+          priority
+          src="/images/logo_.jpg"
+          height={153 * 1.5}
+          width={431 * 1.5}
+          alt="Gift Guide logo"
+          className="col-span-2 text-5xl font-bold"
+        ></Image>
+        {session ? (
+          <div className="dropdown dropdown-bottom dropdown-end justify-self-end">
+            <label tabIndex={0} className="btn btn-circle mt-5">
+              <svg
+                className="fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 512 512"
+              >
+                <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+              </svg>
+            </label>
+            <div
+              tabIndex={0}
+              className="dropdown-content card card-compact w-fit p-2 shadow bg-base-300 text-primary-content"
+            >
+              <div className="card-body">
+                <h3 className="card-title text-xl font-bold">
+                  Account Details
+                </h3>
+                <Account session={session} />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
       {/* <Link href="/test" type="button" className="btn btn-primary btn-sm">
         Go to Test Page
       </Link> */}
@@ -33,8 +63,8 @@ const Home = () => {
         </p>
       </div>
       {!session ? (
-        <div className="mx-auto max-w-xl mt-10">
-          Log in here to get started!
+        <div className="mx-auto max-w-xl mt-10 font-bold">
+          Log in now to get started!
           <Auth
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
@@ -59,13 +89,13 @@ const Home = () => {
               Go to Saved Gift Guides
             </Link>
           </div>
-          <div className="grid grid-flow-row auto-rows-max ml-10 mb-20">
-            <h3 className="text-xl font-bold mt-20">Account Details:</h3>
-            <Account session={session} />
-          </div>
+          {/* <div className="grid grid-flow-row auto-rows-max ml-10 mb-20"> */}
+          {/* <h3 className="text-xl font-bold mt-20">Account Details:</h3>
+            <Account session={session} /> */}
+          {/* </div> */}
         </div>
       )}
-      <div className="grid justify-center max-w-5xl mx-auto mb-20">
+      <div className="grid justify-center max-w-5xl mx-auto my-20">
         <Image
           priority
           src="/images/gift.png"
