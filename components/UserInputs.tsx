@@ -26,7 +26,7 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
           setInquiries(data);
         }
       } catch (error) {
-        alert("Error loading user data!");
+        alert("Error loading gift guide user inputs!");
         console.log(error);
       } finally {
       }

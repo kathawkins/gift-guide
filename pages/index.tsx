@@ -19,7 +19,7 @@ const Home = () => {
           alt="Gift Guide logo"
           className="col-span-2 text-5xl font-bold"
         ></Image>
-        {session ? (
+        {session && (
           <div className="dropdown dropdown-bottom dropdown-end justify-self-end">
             <label tabIndex={0} className="btn btn-circle mt-5">
               <svg
@@ -44,8 +44,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <div></div>
         )}
       </div>
       {/* <Link href="/test" type="button" className="btn btn-primary btn-sm">
@@ -89,10 +87,6 @@ const Home = () => {
               Go to Saved Gift Guides
             </Link>
           </div>
-          {/* <div className="grid grid-flow-row auto-rows-max ml-10 mb-20"> */}
-          {/* <h3 className="text-xl font-bold mt-20">Account Details:</h3>
-            <Account session={session} /> */}
-          {/* </div> */}
         </div>
       )}
       <div className="grid justify-center max-w-5xl mx-auto my-20">

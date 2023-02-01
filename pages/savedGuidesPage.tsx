@@ -52,8 +52,8 @@ export default function SavedGuidesPage() {
             <Inquiries setInquiry={setInquiryID} />
             {/* Inquiry (inputs/gifts) Details Display */}
             {!inquiryID && (
-              <h3 className="mt-10 md:mt-0 flex flex-none basis-2/4 text-2xl items-center">
-                Select a guide to see it&apos;s details!{" "}
+              <h3 className="mt-10 md:mt-0 flex flex-none basis-2/4 text-2xl items-center justify-center">
+                Select a guide to see it&apos;s details!
               </h3>
             )}
             {inquiryID && (

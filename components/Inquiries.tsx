@@ -14,6 +14,13 @@ export default function Inquiries({
   const user = useUser();
   const [username, setUsername] = useState<Profiles["username"]>(null);
   const [inquiries, setInquiries] = useState<Inquiry[] | null>(null);
+  const [activeModal, setActiveModal] = useState(false);
+
+  const continueDelete = async (inquiry: Inquiry) => {
+    // waiting for delete request to complete (or throw an error) before closing modal
+    await deleteInquiryAndGifts(inquiry);
+    setActiveModal(false);
+  };
 
   async function deleteInquiryAndGifts(inquiry: Inquiry) {
     if (!inquiries) {
@@ -55,7 +62,7 @@ export default function Inquiries({
   useEffect(() => {
     async function getUsername() {
       try {
-        if (!user) throw new Error("No user");
+        if (!user) throw new Error("No user when fetching username");
 
         let { data, error, status } = await supabase
           .from("profiles")
@@ -138,13 +145,47 @@ export default function Inquiries({
                       </label>
                     </div>
                     <div className="grid justify-end max-w-xs w-fit">
-                      <button
+                      <label
+                        htmlFor="my-modal-6"
                         className="btn btn-secondary btn-outline btn-sm text-xs h-fit"
-                        onClick={() => deleteInquiryAndGifts(inquiry)}
+                        // onClick={() => deleteInquiryAndGifts(inquiry)}
+                        onClick={() => setActiveModal(true)}
                       >
                         Delete from Profile
-                      </button>
+                      </label>
                     </div>
+                    {activeModal && (
+                      <div>
+                        <input
+                          type="checkbox"
+                          id="my-modal-6"
+                          className="modal-toggle"
+                        />
+                        <div className="modal modal-bottom sm:modal-middle">
+                          <div className="modal-box">
+                            <h3 className="font-bold text-lg">Are you sure?</h3>
+                            <p className="py-4">
+                              The gift guide will be permanantly deleted from
+                              your profile.
+                            </p>
+                            <div className="modal-action">
+                              <label
+                                htmlFor="my-modal-6"
+                                className="btn btn-error"
+                              >
+                                Cancel
+                              </label>
+                              <button
+                                className="btn"
+                                onClick={() => continueDelete(inquiry)}
+                              >
+                                Yep!
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </li>
                 );
               })}

@@ -47,7 +47,6 @@ export default function GiftIdeas({
     async function getGiftIdeas() {
       try {
         setLoading(true);
-        if (!user) throw new Error("No user");
 
         let { data, error, status } = await supabase
           .from("gifts")

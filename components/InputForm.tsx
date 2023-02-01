@@ -248,8 +248,6 @@ export default function InputForm({
     prompt: string
   ) {
     try {
-      if (!user) throw new Error("No user");
-
       let { data, error } = await supabase
         .from("inquiries")
         .insert({
