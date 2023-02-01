@@ -111,7 +111,7 @@ export default function NewGuidePage() {
         height={153}
         width={431}
         alt="Gift Guide logo"
-        className="flex text-5xl font-bold mt-10 mx-10"
+        className="flex text-5xl font-bold mt-10 md:mx-10"
       ></Image>
       {!session ? (
         <div className="mx-auto max-w-xl">
@@ -124,7 +124,7 @@ export default function NewGuidePage() {
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 px-8 max-w-xl mx-auto mt-5">
             <Link href="/" type="button" className="btn btn-primary btn-sm">
               Go to Homepage
             </Link>

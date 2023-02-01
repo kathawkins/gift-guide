@@ -295,6 +295,7 @@ export default function InputForm({
         required
         onChange={onTitleChange}
         value={formFields.title}
+        maxLength={50}
         placeholder='(e.g. "Gift for Mom&apos;s 50th")'
         className="input input-primary input-bordered w-full"
       ></input>

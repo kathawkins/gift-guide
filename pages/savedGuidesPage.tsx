@@ -20,7 +20,7 @@ export default function SavedGuidesPage() {
         height={153}
         width={431}
         alt="Gift Guide logo"
-        className="flex text-5xl font-bold mt-10 mx-10"
+        className="flex text-5xl font-bold mt-10 md:mx-10"
       ></Image>
       {!session ? (
         <div className="mx-auto max-w-xl">
@@ -33,7 +33,8 @@ export default function SavedGuidesPage() {
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-10">
+          {/* Navigation Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 px-8 max-w-xl mx-auto mt-5">
             <Link href="/" type="button" className="btn btn-primary btn-sm">
               Go to Homepage
             </Link>
@@ -45,23 +46,22 @@ export default function SavedGuidesPage() {
               Create a New Gift Guide
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto mt-10">
-            <div className="mb-20">
-              <Inquiries setInquiry={setInquiryID} />
-            </div>
-            <div className="grid">
-              {!inquiryID && (
-                <h3 className="text-2xl grid place-content-center">
-                  Select a guide to see it&apos;s details!{" "}
-                </h3>
-              )}
-              {inquiryID && (
-                <div className="mt-11 mb-20">
-                  <UserInputs inquiryID={inquiryID} />
-                  <GiftIdeas inquiryID={inquiryID} giftedFunctionality={true} />
-                </div>
-              )}
-            </div>
+          {/* Gift Guides Display */}
+          <div className="md:flex gap-8 max-w-4xl mx-auto px-5 mt-10 mb-20">
+            {/* Inquiries List Display */}
+            <Inquiries setInquiry={setInquiryID} />
+            {/* Inquiry (inputs/gifts) Details Display */}
+            {!inquiryID && (
+              <h3 className="mt-10 md:mt-0 flex flex-none basis-2/4 text-2xl items-center">
+                Select a guide to see it&apos;s details!{" "}
+              </h3>
+            )}
+            {inquiryID && (
+              <div className="grid mt-14">
+                <UserInputs inquiryID={inquiryID} />
+                <GiftIdeas inquiryID={inquiryID} giftedFunctionality={true} />
+              </div>
+            )}
           </div>
         </div>
       )}

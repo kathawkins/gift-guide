@@ -35,27 +35,25 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
   }, [inquiryID, supabase, user]);
 
   return (
-    <div className="mt-2">
+    <div>
       {inquiries &&
         inquiries.map((inquiry) => {
           return (
-            <div key={inquiry.id}>
-              <div className="text-xs mt-2 mb-5 bg-base-200 mr-5 p-1">
-                <p>Title: {inquiry.title}</p>
-                <p>Occasion: {inquiry.g_occasion}</p>
-                <p>
-                  Price Range: ${inquiry.g_price_low}-{inquiry.g_price_high}
-                </p>
-                <p>Age: {inquiry.r_age}</p>
+            <div key={inquiry.id} className="text-xs bg-base-300 p-1">
+              <p>Title: {inquiry.title}</p>
+              <p>Occasion: {inquiry.g_occasion}</p>
+              <p>
+                Price Range: ${inquiry.g_price_low}-{inquiry.g_price_high}
+              </p>
+              <p>Age: {inquiry.r_age}</p>
 
-                {inquiry.r_occupation ? (
-                  <p> Occupation: {inquiry.r_occupation}</p>
-                ) : (
-                  <p> Occupation: (not included)</p>
-                )}
-                <p>Hobbies: {inquiry.r_hobbies}</p>
-                <p>Interests: {inquiry.r_interests}</p>
-              </div>
+              {inquiry.r_occupation ? (
+                <p> Occupation: {inquiry.r_occupation}</p>
+              ) : (
+                <p> Occupation: (not included)</p>
+              )}
+              <p>Hobbies: {inquiry.r_hobbies}</p>
+              <p>Interests: {inquiry.r_interests}</p>
             </div>
           );
         })}

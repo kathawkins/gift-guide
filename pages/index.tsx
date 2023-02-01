@@ -10,23 +10,17 @@ const Home = () => {
 
   return (
     <div>
-      {/* <div className="grid justify-center max-w-5xl mx-auto mt-5">
-        <Image
-          priority
-          src="/images/gift.png"
-          height={208}
-          width={208}
-          alt="gift logo"
-        />
-      </div> */}
       <Image
         priority
         src="/images/logo_.jpg"
         height={153 * 1.5}
         width={431 * 1.5}
         alt="Gift Guide logo"
-        className="flex text-5xl font-bold mt-5 mx-10"
+        className="flex text-5xl font-bold mt-5 md:mx-10"
       ></Image>
+      {/* <Link href="/test" type="button" className="btn btn-primary btn-sm">
+        Go to Test Page
+      </Link> */}
       <div className="grid grid-cols-2 gap-1.5 my-2 mx-auto px-5 max-w-4xl content-center">
         <h2 className="text-3xl">
           Unwrap the Perfect Gift with Our AI-Powered Gift Suggester
@@ -49,7 +43,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          <div className="grid grid-cols-2 gap-8 max-w-xl mx-auto mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-8 px-8 max-w-xl mx-auto mt-10">
             <Link
               href="/newGuidePage"
               type="button"

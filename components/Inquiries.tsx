@@ -109,7 +109,7 @@ export default function Inquiries({
         </div>
       ) : (
         <div>
-          <h2 className="text-2xl ml-5">
+          <h2 className="text-2xl">
             <span className="font-bold">{username ? username : "User"}</span>
             &apos;s Previous Gift Guides:
           </h2>
@@ -119,20 +119,20 @@ export default function Inquiries({
                 return (
                   <li
                     key={inquiry.id}
-                    className="grid grid-cols-3 gap-2 my-1 items-center ml-5"
+                    className="grid grid-cols-3 gap-2 items-center mb-1"
                   >
-                    <div className="flex col-span-2">
+                    <div className="grid col-span-2">
                       <label className="flex cursor-pointer">
                         <input
                           type="radio"
                           name="radio-1"
-                          className="radio radio-primary radio-sm mr-2 my-auto"
+                          className="radio radio-xs mr-2 my-auto"
                           onClick={() => setInquiry(inquiry.id)}
                         ></input>
-                        <span>{inquiry.title}</span>
+                        <span className="flex">{inquiry.title}</span>
                       </label>
                     </div>
-                    <div className="grid justify-end max-w-xs">
+                    <div className="grid justify-end max-w-xs w-fit">
                       <button
                         className="btn btn-secondary btn-outline btn-sm text-xs h-fit"
                         onClick={() => deleteInquiryAndGifts(inquiry)}
