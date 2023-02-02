@@ -24,7 +24,7 @@ export default function Inquiries({
 
   async function deleteInquiryAndGifts(inquiry: Inquiry) {
     if (!inquiries) {
-      console.error("Tried to update inquiries when gifts were null");
+      console.error("Tried to delete inquiry data when inquiries were null");
       return;
     }
     try {
@@ -86,7 +86,6 @@ export default function Inquiries({
     async function getInquiries() {
       try {
         setLoading(true);
-        if (!user) throw new Error("No user");
 
         let { data, error, status } = await supabase.from("inquiries").select();
 
@@ -117,8 +116,8 @@ export default function Inquiries({
       ) : (
         <div>
           <h2 className="text-2xl">
-            <span className="font-bold">
-              {username ? username + " " : "Your "}
+            <span className="font-bold mr-1">
+              {username ? username : "Your"}
             </span>
             Previous Gift Guides:
           </h2>
@@ -148,10 +147,9 @@ export default function Inquiries({
                       <label
                         htmlFor="my-modal-6"
                         className="btn btn-secondary btn-outline btn-sm text-xs h-fit"
-                        // onClick={() => deleteInquiryAndGifts(inquiry)}
                         onClick={() => setActiveModal(true)}
                       >
-                        Delete from Profile
+                        Delete
                       </label>
                     </div>
                     {activeModal && (
@@ -166,7 +164,7 @@ export default function Inquiries({
                             <h3 className="font-bold text-lg">Are you sure?</h3>
                             <p className="py-4">
                               The gift guide will be permanantly deleted from
-                              your profile.
+                              your account.
                             </p>
                             <div className="modal-action">
                               <label

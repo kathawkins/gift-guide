@@ -35,8 +35,8 @@ export default function InputForm({
     hobby2: "",
     hobby3: "",
     occasion: "",
-    priceLow: 0,
-    priceHigh: 100,
+    priceLow: "",
+    priceHigh: "",
   });
 
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -599,6 +599,7 @@ export default function InputForm({
           onChange={onPriceLowChange}
           value={formFields.priceLow}
           className="input input-primary input-bordered w-full"
+          placeholder="0"
         ></input>
         $ High:{" "}
         <input
@@ -609,6 +610,7 @@ export default function InputForm({
           value={formFields.priceHigh}
           min={formFields.priceLow + 1}
           className="input input-primary input-bordered w-full"
+          placeholder="100"
         ></input>
       </div>
       <label htmlFor="title" className="text-lg font-bold mt-2">

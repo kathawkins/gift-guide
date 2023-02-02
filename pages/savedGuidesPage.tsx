@@ -52,12 +52,12 @@ export default function SavedGuidesPage() {
             <Inquiries setInquiry={setInquiryID} />
             {/* Inquiry (inputs/gifts) Details Display */}
             {!inquiryID && (
-              <h3 className="mt-10 md:mt-0 flex flex-none basis-2/4 text-2xl items-center justify-center">
+              <h3 className="mt-10 md:mt-0 flex basis-2/4 text-2xl items-center justify-center">
                 Select a guide to see it&apos;s details!
               </h3>
             )}
             {inquiryID && (
-              <div className="grid mt-14">
+              <div className="basis-2/4 mt-14">
                 <UserInputs inquiryID={inquiryID} />
                 <GiftIdeas inquiryID={inquiryID} giftedFunctionality={true} />
               </div>

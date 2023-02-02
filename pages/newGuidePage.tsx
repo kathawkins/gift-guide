@@ -183,7 +183,7 @@ export default function NewGuidePage() {
                       We hope these suggestions are helpful!
                     </p>
                     <div className="flex mt-2 mx-auto justify-center max-w-sm">
-                      This guide has been saved to your profile! You can go to
+                      This guide has been saved to your account! You can go to
                       the Saved Guides page to see notes and track the status of
                       each gift.
                     </div>
