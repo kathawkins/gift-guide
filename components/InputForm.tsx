@@ -35,8 +35,8 @@ export default function InputForm({
     hobby2: "",
     hobby3: "",
     occasion: "",
-    priceLow: "",
-    priceHigh: "",
+    priceLow: 0,
+    priceHigh: 100,
   });
 
   const onTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -212,7 +212,6 @@ export default function InputForm({
     };
 
     const giftRequestPrompt = createGPTPrompt(inquiryData);
-
     saveInquiry(inquiryData, giftRequestPrompt);
 
     setformFields({
@@ -591,7 +590,7 @@ export default function InputForm({
       </datalist>
       <label className="text-lg font-bold mt-2">Desired Price Range</label>
       <div className="columns-2 max-w-xs">
-        $ Low:{" "}
+        $ Low:
         <input
           type="number"
           id="priceLow"
@@ -601,7 +600,7 @@ export default function InputForm({
           className="input input-primary input-bordered w-full"
           placeholder="0"
         ></input>
-        $ High:{" "}
+        $ High:
         <input
           type="number"
           id="priceHigh"
