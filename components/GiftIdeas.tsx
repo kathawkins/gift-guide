@@ -142,7 +142,7 @@ export default function GiftIdeas({
                       <input
                         type="checkbox"
                         className="toggle toggle-xs my-auto"
-                        onClick={() => updateGiftedStatus(gift)}
+                        onChange={() => updateGiftedStatus(gift)}
                         checked={gift.gifted}
                       />
                     </label>

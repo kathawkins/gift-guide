@@ -16,13 +16,13 @@ export default function Inquiries({
   const [inquiries, setInquiries] = useState<Inquiry[] | null>(null);
   const [activeModal, setActiveModal] = useState(false);
 
-  const continueDelete = async (inquiry: Inquiry) => {
+  const continueDelete = async (selectedInquiry: Inquiry) => {
     // waiting for delete request to complete (or throw an error) before closing modal
-    await deleteInquiryAndGifts(inquiry);
+    await deleteInquiryAndGifts(selectedInquiry);
     setActiveModal(false);
   };
 
-  async function deleteInquiryAndGifts(inquiry: Inquiry) {
+  async function deleteInquiryAndGifts(selectedInquiry: Inquiry) {
     if (!inquiries) {
       console.error("Tried to delete inquiry data when inquiries were null");
       return;
@@ -31,7 +31,7 @@ export default function Inquiries({
       let { error } = await supabase
         .from("gifts")
         .delete()
-        .eq("inquiry_id", inquiry.id);
+        .eq("inquiry_id", selectedInquiry.id);
 
       if (error) {
         throw error;
@@ -44,9 +44,9 @@ export default function Inquiries({
       let { error } = await supabase
         .from("inquiries")
         .delete()
-        .eq("id", inquiry.id);
+        .eq("id", selectedInquiry.id);
       const updatedInquiries = inquiries.filter(
-        (inquiryRecord) => inquiryRecord.id != inquiry.id
+        (inquiryRecord) => inquiryRecord.id != selectedInquiry.id
       );
       setInquiries(updatedInquiries);
       setInquiry(null);
@@ -126,67 +126,73 @@ export default function Inquiries({
           )}
           <ul className="mt-5">
             {inquiries &&
-              inquiries.map((inquiry) => {
-                return (
-                  <li
-                    key={inquiry.id}
-                    className="grid grid-cols-3 gap-2 items-center mb-1"
-                  >
-                    <div className="grid col-span-2">
-                      <label className="flex cursor-pointer">
-                        <input
-                          type="radio"
-                          name="radio-1"
-                          className="radio radio-xs mr-2 my-auto"
-                          onClick={() => setInquiry(inquiry.id)}
-                        ></input>
-                        <span className="flex">{inquiry.title}</span>
-                      </label>
-                    </div>
-                    <div className="grid justify-end max-w-xs w-fit">
-                      <label
-                        htmlFor="my-modal-6"
-                        className="btn btn-secondary btn-outline btn-sm text-xs h-fit"
-                        onClick={() => setActiveModal(true)}
-                      >
-                        Delete
-                      </label>
-                    </div>
-                    {activeModal && (
-                      <div>
-                        <input
-                          type="checkbox"
-                          id="my-modal-6"
-                          className="modal-toggle"
-                        />
-                        <div className="modal modal-bottom sm:modal-middle">
-                          <div className="modal-box">
-                            <h3 className="font-bold text-lg">Are you sure?</h3>
-                            <p className="py-4">
-                              The gift guide will be permanantly deleted from
-                              your account.
-                            </p>
-                            <div className="modal-action">
-                              <label
-                                htmlFor="my-modal-6"
-                                className="btn btn-error"
-                              >
-                                Cancel
-                              </label>
-                              <button
-                                className="btn"
-                                onClick={() => continueDelete(inquiry)}
-                              >
-                                Yep!
-                              </button>
+              inquiries
+                .sort((inquiryA, inquiryB) => {
+                  return inquiryA.id - inquiryB.id;
+                })
+                .map((inquiry) => {
+                  return (
+                    <li
+                      key={inquiry.id}
+                      className="grid grid-cols-3 gap-2 items-center mb-1"
+                    >
+                      <div className="grid col-span-2">
+                        <label className="flex cursor-pointer">
+                          <input
+                            type="radio"
+                            name="radio-1"
+                            className="radio radio-xs mr-2 my-auto"
+                            onClick={() => setInquiry(inquiry.id)}
+                          ></input>
+                          <span className="flex">{inquiry.title}</span>
+                        </label>
+                      </div>
+                      <div className="grid justify-end max-w-xs w-fit">
+                        <label
+                          htmlFor={inquiry.id.toString()}
+                          className="btn btn-secondary btn-outline btn-sm text-xs h-fit"
+                          onClick={() => setActiveModal(true)}
+                        >
+                          Delete
+                        </label>
+                      </div>
+                      {activeModal && (
+                        <div>
+                          <input
+                            type="checkbox"
+                            className="modal-toggle"
+                            id={inquiry.id.toString()}
+                          />
+                          <div className="modal modal-bottom sm:modal-middle">
+                            <div className="modal-box">
+                              <h3 className="font-bold text-lg">
+                                Are you sure?
+                              </h3>
+                              <p className="py-4">
+                                The gift guide will be permanantly deleted from
+                                your account.
+                              </p>
+                              <div className="modal-action">
+                                <label
+                                  htmlFor={inquiry.id.toString()}
+                                  className="btn btn-error"
+                                >
+                                  Cancel
+                                </label>
+                                <button
+                                  className="btn"
+                                  onClick={() => continueDelete(inquiry)}
+                                >
+                                  Yep!
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
+                      )}
+                    </li>
+                  );
+                })}
           </ul>
         </div>
       )}
