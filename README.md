@@ -1,6 +1,6 @@
 # Gift Guide - An AI Powered Gift Suggester
 
-[Gift Guide](https://gift-guide-neon.vercel.app/) is my capstone project for [Ada Developers Academy](http://adadevelopersacademy.org/), Digital Campus, Cohort 18. This project is a web application that uses AI to generate personalized gift ideas for the person they are shopping for.
+[Gift Guide](https://gift-guide-neon.vercel.app/) is my capstone project for [Ada Developers Academy](http://adadevelopersacademy.org/), Digital Campus, Cohort 18. This project is a web application that uses AI to generate personalized gift ideas for a person the user is shopping for.
 
 ## Functionality
 
