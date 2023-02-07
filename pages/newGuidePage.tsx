@@ -138,13 +138,10 @@ export default function NewGuidePage() {
           </div>
 
           {!showGifts && (
-            // <div>
-
             <InputForm
               newInquiryCreated={newInquiryCreated}
               requestGifts={requestGiftsFromGPT}
             ></InputForm>
-            // </div>
           )}
 
           <div>
