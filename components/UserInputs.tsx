@@ -39,7 +39,10 @@ export default function UserInputs({ inquiryID }: { inquiryID: number }) {
       {inquiries &&
         inquiries.map((inquiry) => {
           return (
-            <div key={inquiry.id} className="text-xs bg-base-300 p-1">
+            <div
+              key={inquiry.id}
+              className="text-xs bg-base-300 py-2 px-5 rounded-md"
+            >
               <p>Title: {inquiry.title}</p>
               <p>Occasion: {inquiry.g_occasion}</p>
               <p>

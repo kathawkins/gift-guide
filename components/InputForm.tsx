@@ -287,7 +287,11 @@ export default function InputForm({
           className="form-control max-w-2xl mx-auto px-5 justify-self-center mt-5"
           onSubmit={onFormSubmit}
         >
-          <label className="text-lg font-bold mt-2">
+          <h2 className="text-2xl mt-10">
+            Ready to find the perfect gift? Tell us about the person you&apos;re
+            shopping for.
+          </h2>
+          <label className="text-lg font-bold mt-5">
             Relationship to Recipient
           </label>
           <input

@@ -138,24 +138,208 @@ export default function NewGuidePage() {
           </div>
 
           {!showGifts && (
-            <div>
-              <h2 className="text-2xl mt-10 ml-10">
-                Ready to find the perfect gift? Tell us about the person
-                you&apos;re shopping for.
-              </h2>
-              <InputForm
-                newInquiryCreated={newInquiryCreated}
-                requestGifts={requestGiftsFromGPT}
-              ></InputForm>
-            </div>
+            // <div>
+
+            <InputForm
+              newInquiryCreated={newInquiryCreated}
+              requestGifts={requestGiftsFromGPT}
+            ></InputForm>
+            // </div>
           )}
 
           <div>
             {loading ? (
-              <div className="mx-10">
-                <h3 className="text-2xl font-bold mt-5 mb-20 flex justify-center">
+              <div className="mx-10 mb-20">
+                <h3 className="text-2xl font-bold mt-10 flex justify-center">
                   Loading gifts for {newInquiry?.title}!...
                 </h3>
+                {/* User Inputs skeleton */}
+                <div className="w-96 h-32 mx-auto mt-5 bg-base-300 rounded-md">
+                  <div className="flex animate-pulse flex-row items-center h-full py-2 px-5">
+                    <div className="space-y-2">
+                      <p className="w-48 bg-primary-content h-2 rounded-md"></p>
+                      <p className="w-36 bg-primary-content h-2 rounded-md "></p>
+                      <p className="w-36 bg-primary-content h-2 rounded-md"></p>
+                      <p className="w-24 bg-primary-content h-2 rounded-md "></p>
+                      <p className="w-24 bg-primary-content h-2 rounded-md"></p>
+                      <p className="w-56 bg-primary-content h-2 rounded-md "></p>
+                      <p className="w-56 bg-primary-content h-2 rounded-md"></p>
+                    </div>
+                  </div>
+                </div>
+                {/* Gift Ideas skeleton */}
+                <div className="w-96 mx-auto mt-2 animate-pulse py-2 px-1 space-y-2">
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <svg
+                      className="w-6 h-6 mr-1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                      />
+                    </svg>
+                    <p className="w-80 bg-primary-content h-4 rounded-md "></p>
+                  </li>
+                </div>
               </div>
             ) : (
               <div className="mb-20 mx-10">
