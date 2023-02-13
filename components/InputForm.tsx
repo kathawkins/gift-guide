@@ -426,7 +426,7 @@ export default function InputForm({
                 <option>Tech</option>
                 <option>Self-care</option>
                 <option>Movies</option>
-                <option>Wine</option>
+                <option>Cars</option>
                 <option>Video Games</option>
                 <option>Wine</option>
                 <option>TV</option>
@@ -462,7 +462,7 @@ export default function InputForm({
                 <option>Movies</option>
                 <option>Wine</option>
                 <option>Video Games</option>
-                <option>Wine</option>
+                <option>Cars</option>
                 <option>TV</option>
                 <option>Music</option>
                 <option>Yoga</option>

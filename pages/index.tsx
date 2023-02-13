@@ -46,9 +46,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      {/* <Link href="/test" type="button" className="btn btn-primary btn-sm">
-        Go to Test Page
-      </Link> */}
       <div className="grid grid-cols-2 gap-1.5 my-2 mx-auto px-5 max-w-4xl content-center">
         <h2 className="text-3xl">
           Unwrap the Perfect Gift with Our AI-Powered Gift Suggester
