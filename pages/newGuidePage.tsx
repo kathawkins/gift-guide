@@ -12,6 +12,7 @@ import UserInputs from "@/components/UserInputs";
 import { Database } from "../types/supabase";
 type Inquiry = Database["public"]["Tables"]["inquiries"]["Row"];
 import Image from "next/image";
+import Head from "next/head";
 
 export default function NewGuidePage() {
   const session = useSession();
@@ -105,6 +106,12 @@ export default function NewGuidePage() {
 
   return (
     <div>
+      <Head>
+        <title>New - Gift Guide</title>
+        <meta name="description" content="Gift Guide new page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/gifticon.ico" />
+      </Head>
       <Image
         priority
         src="/images/logo_.jpg"

@@ -3,6 +3,7 @@ import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Link from "next/link";
 import Account from "../components/Account";
 import Image from "next/image";
+import Head from "next/head";
 
 const Home = () => {
   const session = useSession();
@@ -10,6 +11,12 @@ const Home = () => {
 
   return (
     <div>
+      <Head>
+        <title>Home - Gift Guide</title>
+        <meta name="description" content="Gift Guide homepage" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/gifticon.ico" />
+      </Head>
       <div className="grid grid-cols-3 mt-5 mx-2 md:mx-10 gap-4">
         <Image
           priority

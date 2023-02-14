@@ -6,6 +6,7 @@ import Inquiries from "../components/Inquiries";
 import UserInputs from "@/components/UserInputs";
 import GiftIdeas from "@/components/GiftIdeas";
 import Image from "next/image";
+import Head from "next/head";
 
 export default function SavedGuidesPage() {
   const session = useSession();
@@ -14,6 +15,12 @@ export default function SavedGuidesPage() {
 
   return (
     <div>
+      <Head>
+        <title>Saved - Gift Guide</title>
+        <meta name="description" content="Gift Guide saved page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/gifticon.ico" />
+      </Head>
       <Image
         priority
         src="/images/logo_.jpg"
